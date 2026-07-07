@@ -17,7 +17,7 @@ This repository is the source of truth for Lyra. Requirements, domain language, 
 | Path | Purpose |
 | --- | --- |
 | `PROJECT.md` | Lyra constitution and mandatory first read for humans and AI agents. |
-| `.ai/` | Concise onboarding and operating context for AI coding agents. |
+| `.ai/` | Numbered, canonical AI Knowledge Center documents for AI coding agents; unnumbered files are compatibility redirects only. |
 | `docs/specifications/` | Numbered product and platform specifications. |
 | `docs/architecture/` | Architecture narratives, open questions, and diagram placeholders. |
 | `docs/decisions/` | Architecture Decision Records. |
@@ -31,7 +31,7 @@ This repository is the source of truth for Lyra. Requirements, domain language, 
 ## Getting Started
 
 1. Read `PROJECT.md` to understand non-negotiable principles.
-2. Read `.ai/00-start-here.md` if you are an AI agent or operating with one.
+2. Read `.ai/00-start-here.md` if you are an AI agent or operating with one; treat the numbered `.ai/` documents as canonical.
 3. Review `docs/specifications/06-functional-requirements.md` and `docs/specifications/07-non-functional-requirements.md` before proposing implementation.
 4. Check `docs/decisions/` before changing architecture.
 5. Update documentation and requirement references before writing code.
