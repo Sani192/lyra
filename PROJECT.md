@@ -131,6 +131,80 @@ Major documentation files under `docs/specifications/`, `docs/architecture/`, `d
 
 Implementation work may rely on `Approved` or `Implementation Ready` documents. `Review Ready` documents may inform implementation only when the pull request cites the approved companion source that resolves the relevant decision. `Placeholder`, `Draft`, `Deprecated`, and `Superseded` documents must not be used as standalone implementation authority.
 
+
+## Governance
+
+Governance defines which repository artifacts have authority, who must approve material changes, how conflicts are resolved, and when work may move from specification to implementation. It supplements the review evidence required by `docs/engineering/review-process.md` and the requirement-to-delivery chain defined in `docs/traceability/README.md`.
+
+### Document Authority Hierarchy
+
+Authoritative decisions must be made from the highest applicable source in this order:
+
+1. `PROJECT.md` establishes repository-wide mission, boundaries, contribution rules, maturity rules, and governance.
+2. Approved `.ai/` operating documents establish AI-agent workflow, implementation-readiness checks, and repository navigation rules.
+3. Approved or Implementation Ready specifications in `docs/specifications/` establish product, platform, API, security, observability, deployment, and UI requirements.
+4. Approved ADRs in `docs/decisions/` establish architectural decisions and accepted tradeoffs.
+5. Approved schemas in `schemas/` and contract guidance in `docs/contracts/` establish machine-readable contract constraints and integration expectations.
+6. Approved examples in `examples/` demonstrate expected usage, safe integration patterns, and failure cases but do not create requirements by themselves.
+7. Implementation in `backend/`, `frontend/`, `sdk/`, and related source areas demonstrates current behavior but must be corrected when it conflicts with authoritative documentation.
+
+Lower-authority artifacts may clarify higher-authority documents, but they must not override them. If a lower-authority artifact appears to add, remove, or contradict a requirement, reviewers must classify the change and update the higher-authority source first.
+
+### Required Approvers
+
+Changes require reviewers with authority over the highest-impact classification involved:
+
+| Change area | Required approvers |
+| --- | --- |
+| Specifications | Product owner or specification maintainer, plus engineering reviewer when implementation impact exists. |
+| ADRs | Architecture owner or designated technical lead, plus maintainers of affected components. |
+| Schemas and contracts | Contract/API owner, schema maintainer, and compatibility reviewer. |
+| Security-sensitive changes | Security reviewer, architecture owner when boundaries change, and affected component maintainer. |
+| Public API changes | API owner, compatibility reviewer, documentation reviewer, and affected SDK or integration maintainer when applicable. |
+
+When one change spans multiple areas, all applicable approver groups are required. Reviewers must verify the review checklist in `docs/engineering/review-process.md` and ensure traceability evidence is complete according to `docs/traceability/README.md`.
+
+### Conflict Resolution Order
+
+When repository sources disagree, resolve the conflict in this order:
+
+1. Preserve Lyra's non-negotiable rules and project boundaries in this document.
+2. Prefer the artifact with higher authority in the document authority hierarchy.
+3. Prefer `Implementation Ready` over `Approved`, `Approved` over `Review Ready`, and reviewed documents over `Draft` or `Placeholder` documents.
+4. Prefer the more specific approved artifact when it does not contradict a higher-authority source. For example, an ADR may refine a specification's implementation approach, and a schema may constrain a contract field.
+5. Prefer the newer approved ADR or specification when it explicitly supersedes an older decision and names the superseded source.
+6. Treat examples and implementation as evidence of current behavior, not authority to bypass requirements, ADRs, schemas, or security review.
+7. If the conflict affects requirements, architecture, schema compatibility, security, or public APIs, stop implementation until the authoritative document is updated and approved.
+
+### Change Classification
+
+Every non-trivial change must be classified in the pull request and reviewed according to the highest applicable class:
+
+| Classification | Meaning | Governance expectations |
+| --- | --- | --- |
+| Documentation-only | Clarifies wording, fixes links, improves examples, or corrects non-normative text without changing requirements, architecture, schemas, APIs, or behavior. | Requires documentation review and link/check evidence. |
+| Requirement-changing | Adds, removes, reinterprets, or changes acceptance criteria, requirement IDs, user-visible behavior, compatibility promises, or readiness expectations. | Requires specification updates, requirement IDs, traceability updates, and product/specification approval before implementation. |
+| Architecture-changing | Changes component responsibilities, system boundaries, data ownership, lifecycle, protocols, persistence, deployment topology, or material tradeoffs. | Requires an ADR or ADR update, architecture approval, affected documentation updates, and traceability to requirements. |
+| Schema-changing | Changes JSON schemas, contracts, validation behavior, compatibility rules, examples that assert contract shape, or generated artifacts. | Requires schema/contract approval, compatibility notes, migration guidance when needed, and tests or validation evidence. |
+| Implementation-changing | Changes runtime behavior, source code, build outputs, tests, or operational behavior without changing approved requirements or architecture. | Requires requirement traceability, relevant tests/checks, documentation updates for visible behavior, and component maintainer review. |
+
+If a change could reasonably fit more than one class, use the more restrictive classification and document why. Security-sensitive and public API changes always require the approvers named above even when the textual diff appears small.
+
+### Release and Readiness Gates
+
+Work may move from specification to implementation only after all applicable gates are satisfied:
+
+1. The relevant requirement IDs exist, are stable, and are cited in the planned change.
+2. Affected specifications are `Approved` or `Implementation Ready`, or the pull request cites an approved companion source that resolves any `Review Ready` material.
+3. Required ADRs exist and are approved for architecture-changing work.
+4. Schemas, contracts, and examples are updated before or alongside implementation when behavior is externally visible.
+5. Security, privacy, tenant isolation, compatibility, migration, and observability impacts are explicitly assessed.
+6. The traceability chain from requirement to architecture, API/contract, implementation, tests, and documentation is known or updated according to `docs/traceability/README.md`.
+7. Required approvers have reviewed the change under `docs/engineering/review-process.md`.
+8. Relevant validation checks, contract checks, tests, and documentation checks are recorded before release or merge.
+
+A change that fails any gate is not ready for implementation. If implementation already exists and governance evidence is missing, the next change must either add the missing evidence or roll the behavior back behind an approved plan.
+
 ## Quality Standards
 
 All repository content must be accurate, cross-referenced, professionally written, and useful to a future contributor. Placeholder text, unexplained TODOs, broken links, and ambiguous ownership are not acceptable.
