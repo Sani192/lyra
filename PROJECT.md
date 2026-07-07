@@ -79,6 +79,13 @@ A change is ready for implementation only when the relevant requirement IDs, aff
 
 A change is done only when documentation is updated, requirement IDs are traceable, tests/checks are recorded, compatibility impact is documented, examples are updated when behavior is visible, and reviewers can understand the change without external context.
 
+
+## Artifact-Specific Readiness and Done Criteria
+
+The repository-wide Definition of Ready and Definition of Done are specialized by artifact type in `docs/engineering/review-process.md`. Contributors must use the applicable artifact-specific checklist for requirement changes, architecture changes, ADRs, schema changes, contract changes, examples/playbooks, backend implementation, frontend implementation, SDK implementation, and security-sensitive changes.
+
+For every applicable category, readiness must identify required documentation, planned tests or validation, traceability targets, compatibility impact, and expected review evidence before work starts. Done means those documents, tests, traceability links, compatibility or migration notes, and review records are complete enough for a future contributor to audit the change without external context.
+
 ## Contribution Workflow
 
 1. Read `PROJECT.md`, `README.md`, and `.ai/00-start-here.md`.
