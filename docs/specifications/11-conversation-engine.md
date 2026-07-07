@@ -37,3 +37,31 @@ Expand this chapter with reviewed requirements, diagrams where useful, and links
 
 * `PROJECT.md`
 * `docs/decisions/`
+
+## Business Motivation
+
+This chapter exists to keep Lyra safe for production voice orchestration by documenting intent before implementation.
+
+## Definitions
+
+Use the domain language in `docs/specifications/08-domain-model.md`, `docs/glossary/README.md`, and `.ai/03-domain-model.md`.
+
+## Requirements
+
+Requirement IDs in this chapter must use the conventions in `.ai/05-requirements-index.md` and `docs/standards/requirement-id-standards.md`.
+
+## Acceptance Criteria
+
+A requirement is acceptable only when ownership boundaries, contract impact, observability impact, compatibility impact, and verification approach are clear.
+
+## Examples
+
+Examples should be added or linked when they clarify expected contracts, events, workflows, failure handling, or operator behavior.
+
+## Open Questions
+
+None recorded for this foundation revision. New questions must identify the affected requirement IDs and the document owner responsible for resolution.
+
+## Related ADRs
+
+See `docs/decisions/` for accepted architecture decisions that constrain this chapter.

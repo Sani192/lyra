@@ -22,7 +22,7 @@ This repository is the source of truth for Lyra. Requirements, domain language, 
 | `docs/architecture/` | Architecture narratives, open questions, and diagram placeholders. |
 | `docs/decisions/` | Architecture Decision Records. |
 | `docs/playbooks/` | Scenario-specific orchestration playbooks. |
-| `docs/standards/` | Documentation, naming, versioning, branching, review, and coding standards. |
+| `docs/engineering/`, `docs/standards/` | Documentation, naming, versioning, branching, review, and coding standards. |
 | `schemas/` | Draft schema documentation for contracts, capabilities, conversations, events, organizations, and workflows. |
 | `examples/` | Consumer-domain examples for restaurants, clinics, hotels, CRM, and ERP systems. |
 | `backend/`, `frontend/`, `sdk/` | Reserved implementation areas; intentionally documentation-only at bootstrap. |
@@ -31,7 +31,7 @@ This repository is the source of truth for Lyra. Requirements, domain language, 
 ## Getting Started
 
 1. Read `PROJECT.md` to understand non-negotiable principles.
-2. Read `.ai/agent-onboarding.md` if you are an AI agent or operating with one.
+2. Read `.ai/00-start-here.md` if you are an AI agent or operating with one.
 3. Review `docs/specifications/06-functional-requirements.md` and `docs/specifications/07-non-functional-requirements.md` before proposing implementation.
 4. Check `docs/decisions/` before changing architecture.
 5. Update documentation and requirement references before writing code.
@@ -46,7 +46,7 @@ This repository is the source of truth for Lyra. Requirements, domain language, 
 
 ## Contribution Guidelines
 
-See `CONTRIBUTING.md` and the standards in `docs/standards/`. Contributions should be small, reviewable, linked to requirement IDs, and aligned with the product constitution in `PROJECT.md`.
+See `CONTRIBUTING.md` and the standards in `docs/engineering/`, `docs/standards/`. Contributions should be small, reviewable, linked to requirement IDs, and aligned with the product constitution in `PROJECT.md`.
 
 ## Future Roadmap
 
