@@ -1,5 +1,12 @@
 # 03 Domain Model
 
+## Maturity Metadata
+
+**Status:** Approved.
+
+**Intended Use:** Authoritative AI-agent operating context; safe for repository navigation and contribution workflow decisions.
+
+
 Each concept below is defined by purpose, owner, relationships, and lifecycle.
 
 ## Organization

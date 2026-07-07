@@ -1,5 +1,12 @@
 # 05 Requirements Index
 
+## Maturity Metadata
+
+**Status:** Approved.
+
+**Intended Use:** Authoritative AI-agent operating context; safe for repository navigation and contribution workflow decisions.
+
+
 ## Purpose
 
 This file defines requirement ID conventions and how implementation traces back to specifications.

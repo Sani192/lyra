@@ -1,5 +1,12 @@
 # 06 Coding Standards
 
+## Maturity Metadata
+
+**Status:** Approved.
+
+**Intended Use:** Authoritative AI-agent operating context; safe for repository navigation and contribution workflow decisions.
+
+
 ## Repository Philosophy
 
 Code should be introduced only after requirements and architecture are documented. Implementation should be small, observable, testable, and aligned with contract boundaries.

@@ -1,5 +1,12 @@
 # 09 Agent Checklist
 
+## Maturity Metadata
+
+**Status:** Approved.
+
+**Intended Use:** Authoritative AI-agent operating context; safe for repository navigation and contribution workflow decisions.
+
+
 Before every implementation or material documentation change, confirm:
 
 - [ ] Read `PROJECT.md`.

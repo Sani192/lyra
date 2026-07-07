@@ -1,5 +1,12 @@
 # Schema Catalog
 
+## Maturity Metadata
+
+**Status:** Draft.
+
+**Intended Use:** Schema catalog and lifecycle planning; not safe as standalone implementation authority until underlying schemas are promoted.
+
+
 ## Purpose
 
 Schemas define machine-readable contracts for Lyra concepts such as capabilities, conversations, events, organizations, consumer contracts, and workflows.

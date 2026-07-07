@@ -1,5 +1,12 @@
 # Clinic Example
 
+## Maturity Metadata
+
+**Status:** Draft.
+
+**Intended Use:** Illustrative integration guidance for planning and review; not safe as an implementation authority until promoted.
+
+
 ## Business Context
 
 This example shows how Lyra can orchestrate a clinic conversation without becoming the system of record. The consumer application owns domain data, policies, and final business decisions.

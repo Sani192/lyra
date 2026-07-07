@@ -1,5 +1,12 @@
 # 08 Common Mistakes
 
+## Maturity Metadata
+
+**Status:** Approved.
+
+**Intended Use:** Authoritative AI-agent operating context; safe for repository navigation and contribution workflow decisions.
+
+
 * Do not store business data such as orders, appointments, payments, customer profiles, loyalty status, pricing, or inventory.
 * Do not duplicate consumer business logic in Lyra workflows.
 * Do not skip documentation because a change appears small.

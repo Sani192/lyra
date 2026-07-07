@@ -1,5 +1,12 @@
 # 04 Architecture Summary
 
+## Maturity Metadata
+
+**Status:** Approved.
+
+**Intended Use:** Authoritative AI-agent operating context; safe for repository navigation and contribution workflow decisions.
+
+
 ## Major Components
 
 * Conversation Engine: manages turn-taking, context, transcripts, and session lifecycle.

@@ -1,8 +1,14 @@
 # Lyra Project Constitution
 
+## Maturity Metadata
+
+**Status:** Approved.
+
+**Intended Use:** Authoritative project constitution and repository policy; safe for implementation decisions about Lyra boundaries, workflows, and documentation maturity.
+
 ## Status
 
-Authoritative. This document is mandatory reading for every human contributor and AI coding agent before changing the repository.
+Approved and authoritative. This document is mandatory reading for every human contributor and AI coding agent before changing the repository.
 
 ## Mission
 
@@ -105,6 +111,25 @@ Human contributors should use the same standards as AI agents: write down decisi
 | `examples/` | Domain examples demonstrating contracts, conversations, capabilities, expected JSON, and failure cases. |
 | `schemas/` | JSON schemas for contracts, capabilities, conversations, events, organizations, and workflows. |
 | `backend/`, `frontend/`, `sdk/` | Reserved implementation areas; do not add business logic without explicit implementation approval. |
+
+
+## Repository Maturity Model
+
+Every major documentation artifact must declare both a status and intended use before it can guide planning, review, or implementation. The status controls how much authority the artifact has in repository decisions.
+
+| Status | Meaning | Implementation Authority |
+| --- | --- | --- |
+| `Placeholder` | The file exists to reserve a topic, location, or future contract but is intentionally incomplete. | Not safe for implementation decisions. |
+| `Draft` | The document contains initial content that needs review, validation, or traceability before it becomes authoritative. | Not safe as the sole basis for implementation decisions. |
+| `Review Ready` | The content is complete enough for formal product, architecture, security, or engineering review. | Safe for review planning, not implementation unless paired with approved sources. |
+| `Approved` | The document has been accepted as authoritative for its stated scope. | Safe for implementation decisions within its scope. |
+| `Implementation Ready` | The document is approved and has enough acceptance criteria, compatibility notes, and traceability for engineering work to start. | Safe and preferred for implementation decisions. |
+| `Deprecated` | The document remains available for historical context, but should not guide new work. | Not safe for new implementation decisions. |
+| `Superseded` | The document has been replaced by another source of truth. | Not safe; use the replacement document named in the file. |
+
+Major documentation files under `docs/specifications/`, `docs/architecture/`, `docs/decisions/`, `schemas/`, `examples/`, and `.ai/` must include status metadata and intended-use guidance. Markdown files should use a `Maturity Metadata` section near the top. JSON files should use explicit status and intended-use metadata fields appropriate to the file type.
+
+Implementation work may rely on `Approved` or `Implementation Ready` documents. `Review Ready` documents may inform implementation only when the pull request cites the approved companion source that resolves the relevant decision. `Placeholder`, `Draft`, `Deprecated`, and `Superseded` documents must not be used as standalone implementation authority.
 
 ## Quality Standards
 

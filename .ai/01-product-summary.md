@@ -1,5 +1,12 @@
 # 01 Product Summary
 
+## Maturity Metadata
+
+**Status:** Approved.
+
+**Intended Use:** Authoritative AI-agent operating context; safe for repository navigation and contribution workflow decisions.
+
+
 ## What Lyra Is
 
 Lyra is a voice AI orchestration platform that receives conversations, identifies intent, selects declared capabilities, invokes consumer systems, and records observable conversation evidence.

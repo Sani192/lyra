@@ -1,5 +1,12 @@
 # ADR-XXXX: Title
 
+## Maturity Metadata
+
+**Status:** Implementation Ready.
+
+**Intended Use:** Template for creating new ADRs; safe to use when documenting architecture decisions.
+
+
 ## Status
 
 Proposed, accepted, superseded, or rejected.
