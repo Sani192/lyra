@@ -25,7 +25,8 @@ Lyra is an AI Voice Orchestration Platform. It coordinates conversations and inv
 6. [`docs/contracts/`](../docs/contracts/README.md)
 7. [`docs/decisions/`](../docs/decisions/ADR-0001.md)
 8. [`examples/`](../examples/restaurant/README.md)
-9. Code or implementation directories only after the documents above are understood.
+9. [`.ai/10-implementation-readiness.md`](./10-implementation-readiness.md)
+10. Code or implementation directories only after the documents above are understood.
 
 ## Mandatory Rules
 
@@ -35,7 +36,8 @@ Lyra is an AI Voice Orchestration Platform. It coordinates conversations and inv
 * Reference requirement IDs for requirement-impacting work.
 * Update documentation before implementation.
 * Preserve Lyra's stateless, contract-driven, protocol-agnostic architecture.
+* Read [`10-implementation-readiness.md`](./10-implementation-readiness.md) before touching backend, frontend, SDK, schemas, contracts, or examples.
 
 ## Navigation Guide
 
-Use the canonical numbered files only: `01-product-summary.md` for product context, `02-core-principles.md` for non-negotiable rules, `03-domain-model.md` for terminology, `04-architecture-summary.md` for boundaries, `05-requirements-index.md` for IDs, `06-coding-standards.md` for implementation standards, `07-prompt-guidelines.md` for AI prompt guidance, `08-common-mistakes.md` for pitfalls, and `09-agent-checklist.md` before making changes.
+Use the canonical numbered files only: `01-product-summary.md` for product context, `02-core-principles.md` for non-negotiable rules, `03-domain-model.md` for terminology, `04-architecture-summary.md` for boundaries, `05-requirements-index.md` for IDs, `06-coding-standards.md` for implementation standards, `07-prompt-guidelines.md` for AI prompt guidance, `08-common-mistakes.md` for pitfalls, `09-agent-checklist.md` before making changes, and `10-implementation-readiness.md` before touching implementation surfaces.

@@ -91,7 +91,7 @@ A change is done only when documentation is updated, requirement IDs are traceab
 
 ## AI Workflow
 
-AI agents must assume no prior chat history. Before changing code or docs, read `.ai/00-start-here.md` and the relevant numbered AI Knowledge Center documents, identify requirement IDs, inspect affected contracts and ADRs, state assumptions in the change, and avoid adding application features unless explicitly requested.
+AI agents must assume no prior chat history. Before changing code or docs, read `.ai/00-start-here.md`, `.ai/10-implementation-readiness.md`, and the relevant numbered AI Knowledge Center documents; identify requirement IDs; inspect affected contracts and ADRs; state assumptions in the change; and avoid adding application features unless explicitly requested.
 
 ## Human Workflow
 
@@ -101,7 +101,7 @@ Human contributors should use the same standards as AI agents: write down decisi
 
 | Path | Purpose |
 | --- | --- |
-| `.ai/` | Mandatory numbered AI Knowledge Center and operating guide; unnumbered files are compatibility redirects only. |
+| `.ai/` | Mandatory numbered AI Knowledge Center and operating guide, including `.ai/10-implementation-readiness.md` as the implementation-readiness gate; unnumbered files are compatibility redirects only. |
 | `docs/specifications/` | Numbered product, platform, API, security, observability, deployment, and UI requirements. |
 | `docs/architecture/` | Component, lifecycle, protocol, storage, security, scalability, and deployment architecture. |
 | `docs/contracts/` | Consumer contract guidance and integration expectations. |
