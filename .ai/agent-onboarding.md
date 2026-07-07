@@ -1,5 +1,12 @@
 # Agent Onboarding
 
+## Maturity Metadata
+
+**Status:** Approved.
+
+**Intended Use:** Authoritative AI-agent operating context; safe for repository navigation and contribution workflow decisions.
+
+
 ## Purpose
 
 This document gives AI agents concise operating context for Lyra. Agents must preserve the boundary that Lyra owns conversation orchestration while consumer applications own business state and business logic.

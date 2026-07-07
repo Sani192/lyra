@@ -17,5 +17,7 @@
       "description": "Fields to be specified during schema design."
     }
   },
-  "additionalProperties": true
+  "additionalProperties": true,
+  "x-documentationStatus": "Draft",
+  "x-intendedUse": "Schema design and validation planning; do not treat as implementation-ready until promoted to Implementation Ready or Approved."
 }

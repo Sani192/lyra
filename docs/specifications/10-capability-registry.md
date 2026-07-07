@@ -1,5 +1,12 @@
 # 10. Capability Registry
 
+## Maturity Metadata
+
+**Status:** Draft.
+
+**Intended Use:** Planning and review guidance; do not treat as implementation-ready unless the status is promoted.
+
+
 ## Purpose
 
 Define the capability registry area of Lyra so contributors share a stable, documented understanding before implementation.

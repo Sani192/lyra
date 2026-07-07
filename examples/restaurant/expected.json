@@ -9,5 +9,7 @@
   "consumer_owns": [
     "business_state",
     "business_rules"
-  ]
+  ],
+  "documentation_status": "Draft",
+  "intended_use": "Illustrative example output for planning and contract review; not authoritative implementation test data until promoted."
 }

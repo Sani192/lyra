@@ -1,5 +1,12 @@
 # 00 Start Here
 
+## Maturity Metadata
+
+**Status:** Approved.
+
+**Intended Use:** Authoritative AI-agent operating context; safe for repository navigation and contribution workflow decisions.
+
+
 ## Purpose
 
 This is the first AI-specific document every AI coding agent must read. It explains where to find authoritative context and how to avoid unsafe assumptions.

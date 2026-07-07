@@ -1,5 +1,12 @@
 # 02 Core Principles
 
+## Maturity Metadata
+
+**Status:** Approved.
+
+**Intended Use:** Authoritative AI-agent operating context; safe for repository navigation and contribution workflow decisions.
+
+
 ## Non-Negotiable Rules
 
 * Lyra never owns business state.

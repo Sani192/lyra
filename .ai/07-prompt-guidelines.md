@@ -1,5 +1,12 @@
 # 07 Prompt Guidelines for AI Agents
 
+## Maturity Metadata
+
+**Status:** Approved.
+
+**Intended Use:** Authoritative AI-agent operating context; safe for repository navigation and contribution workflow decisions.
+
+
 ## Before Changing Code
 
 1. Read `PROJECT.md`.

@@ -1,5 +1,12 @@
 # Capability Invocation
 
+## Maturity Metadata
+
+**Status:** Draft.
+
+**Intended Use:** Planning and review guidance; do not treat as implementation-ready unless the status is promoted.
+
+
 ## Purpose
 
 Describe Lyra's capability invocation in a way that supports future implementation without committing to premature code-level choices.

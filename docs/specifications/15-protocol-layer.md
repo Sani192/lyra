@@ -1,5 +1,12 @@
 # 15. Protocol Layer
 
+## Maturity Metadata
+
+**Status:** Draft.
+
+**Intended Use:** Planning and review guidance; do not treat as implementation-ready unless the status is promoted.
+
+
 ## Purpose
 
 Define the protocol layer area of Lyra so contributors share a stable, documented understanding before implementation.

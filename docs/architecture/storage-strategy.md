@@ -1,5 +1,12 @@
 # Storage Strategy
 
+## Maturity Metadata
+
+**Status:** Draft.
+
+**Intended Use:** Planning and review guidance; do not treat as implementation-ready unless the status is promoted.
+
+
 ## Purpose
 
 Describe Lyra's storage strategy in a way that supports future implementation without committing to premature code-level choices.

@@ -1,5 +1,12 @@
 # 02. Product Vision
 
+## Maturity Metadata
+
+**Status:** Draft.
+
+**Intended Use:** Planning and review guidance; do not treat as implementation-ready unless the status is promoted.
+
+
 ## Purpose
 
 Define the product vision area of Lyra so contributors share a stable, documented understanding before implementation.
