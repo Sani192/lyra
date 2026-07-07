@@ -29,6 +29,7 @@ Lyra is an AI Voice Orchestration Platform. It coordinates conversations and inv
 
 ## Mandatory Rules
 
+* Treat numbered `.ai/` files as authoritative; unnumbered `.ai/` files are compatibility redirects only.
 * Do not assume previous conversation history.
 * Do not implement application features unless explicitly asked.
 * Reference requirement IDs for requirement-impacting work.
@@ -37,4 +38,4 @@ Lyra is an AI Voice Orchestration Platform. It coordinates conversations and inv
 
 ## Navigation Guide
 
-Use `01-product-summary.md` for product context, `02-core-principles.md` for non-negotiable rules, `03-domain-model.md` for terminology, `04-architecture-summary.md` for boundaries, `05-requirements-index.md` for IDs, and `09-agent-checklist.md` before making changes.
+Use the canonical numbered files only: `01-product-summary.md` for product context, `02-core-principles.md` for non-negotiable rules, `03-domain-model.md` for terminology, `04-architecture-summary.md` for boundaries, `05-requirements-index.md` for IDs, `06-coding-standards.md` for implementation standards, `07-prompt-guidelines.md` for AI prompt guidance, `08-common-mistakes.md` for pitfalls, and `09-agent-checklist.md` before making changes.
