@@ -4,6 +4,35 @@ Lyra is an AI Voice Orchestration Platform for receiving customer conversations,
 
 Lyra does **not** own business state. Consumer applications remain the systems of record for orders, customers, inventory, appointments, payments, loyalty, pricing, policies, and business rules. Lyra owns conversation context, AI orchestration, capability invocation, transcripts, recordings, analytics, events, contracts, and observability.
 
+## Current Repository Status
+
+Lyra is currently in a **documentation-first/bootstrap** state. The repository defines the product boundaries, governance model, requirements, architecture direction, contracts, schemas, and examples that future implementation must follow, but it does not yet contain production runtime components.
+
+The implementation directories (`backend/`, `frontend/`, and `sdk/`) are intentionally reserved. They exist to make the future repository shape explicit, not to imply that backend services, frontend applications, SDK packages, build tooling, or deployable artifacts are ready today. The reserved operational areas (`tools/` and `scripts/`) likewise do not yet provide runnable validation or automation.
+
+Many specifications, schemas, contracts, examples, and architecture notes are drafts or placeholders. Treat them as planning material unless their maturity metadata says they are `Approved` or `Implementation Ready`; draft and placeholder artifacts are not implementation-ready on their own.
+
+Authoritative documents today are:
+
+* `PROJECT.md` for the project constitution, repository boundaries, governance, maturity model, and contribution workflow.
+* Numbered `.ai/` documents, especially `.ai/00-start-here.md` and `.ai/10-implementation-readiness.md`, for AI-agent operating guidance and implementation-readiness checks.
+* Approved ADRs in `docs/decisions/` for accepted architectural decisions.
+* Approved or Implementation Ready specifications in `docs/specifications/` when their maturity metadata explicitly grants that authority.
+* Approved engineering, standards, security, traceability, contract, schema, and example documents only within the scope stated by each artifact's maturity metadata.
+
+Before production implementation begins, contributors must expand the relevant functional and non-functional specifications, architecture documents, contract guidance, JSON schemas, examples/playbooks, security and observability guidance, deployment expectations, testing strategy, and traceability records until they include stable requirement IDs, acceptance criteria, compatibility and migration notes, validation expectations, and approved ADR coverage.
+
+## Validation
+
+No repository-wide static-check toolchain is available during bootstrap. Once tooling exists, contributors should run and record the applicable static checks for their change, including:
+
+* Markdown formatting, linting, heading structure, and link validation.
+* JSON syntax and JSON Schema validation for files in `schemas/` and contract examples.
+* Requirement ID format, uniqueness, and traceability validation across specifications, ADRs, implementation, tests, and documentation.
+* OpenAPI, REST contract, webhook, and MCP contract validation when those artifacts are introduced.
+* Dependency, license, secret scanning, and security configuration checks for implementation areas.
+* Type checking, linting, formatting, unit tests, integration tests, and build checks for `backend/`, `frontend/`, `sdk/`, `tools/`, and `scripts/` once those areas contain runnable code.
+
 ## Product Vision
 
 Lyra makes voice automation safe, auditable, and integration-friendly by separating conversation intelligence from business systems. The platform should allow any consumer application to expose capabilities through REST, OpenAPI, or MCP contracts while Lyra orchestrates conversations against those capabilities without embedding consumer-specific logic.
