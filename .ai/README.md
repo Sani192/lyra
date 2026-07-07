@@ -22,6 +22,7 @@ The canonical AI Knowledge Center documents are the numbered Markdown files in t
 8. [`07-prompt-guidelines.md`](./07-prompt-guidelines.md) — prompt and contribution guidance for AI agents.
 9. [`08-common-mistakes.md`](./08-common-mistakes.md) — boundary violations and shortcuts to avoid.
 10. [`09-agent-checklist.md`](./09-agent-checklist.md) — checklist before material changes.
+11. [`10-implementation-readiness.md`](./10-implementation-readiness.md) — readiness gate before touching implementation surfaces.
 
 ## Compatibility Stubs
 
