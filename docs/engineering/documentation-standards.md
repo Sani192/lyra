@@ -4,7 +4,7 @@
 
 **Status:** Approved.
 
-**Intended Use:** Authoritative documentation standard for repository documentation structure, status metadata, review expectations, and implementation-decision safety.
+**Intended Use:** Authoritative documentation standard for repository documentation structure, file naming, status metadata, relative links, review expectations, and implementation-decision safety.
 
 ## Purpose
 
@@ -46,7 +46,14 @@ JSON documents must include explicit status and intended-use metadata. JSON sche
 
 Only `Approved` and `Implementation Ready` documents are safe standalone sources for implementation decisions. `Review Ready` documents may support planning and review but require an approved companion source before engineering work starts. `Placeholder`, `Draft`, `Deprecated`, and `Superseded` documents are not safe as standalone implementation authority.
 
-## Standard
+## File & Formatting Standards
+
+1. **File Naming:** All documentation files must be lowercase with hyphens (e.g., `naming-standards.md`). Number prefixes should be used where order is required (e.g. in specifications or `.ai/` knowledge docs).
+2. **Structure:** All files must start with a single Level 1 heading containing the document name, followed immediately by the Maturity Metadata block.
+3. **Relative Linking:** Always use relative file paths for cross-references (e.g., `[PROJECT.md](../../PROJECT.md)`). Never use absolute file paths or web links for internal repository references.
+4. **Lists and Tables:** Use standard GitHub Flavored Markdown (GFM) lists, tables, and alerts for structured information. Keep lines short and clean.
+
+## Documentation Principles
 
 * Reference stable requirement IDs for requirement-impacting changes.
 * Preserve Lyra's stateless, contract-driven, protocol-agnostic boundary.
@@ -58,9 +65,11 @@ Only `Approved` and `Implementation Ready` documents are safe standalone sources
 
 ## Review Checklist
 
-- Requirement IDs are present where needed.
-- Affected documents are cross-referenced.
-- Compatibility and security impacts are stated.
-- The change is understandable without external chat history.
-- Maturity status and intended use are declared near the top of every affected major document.
-- Documents cited for implementation decisions are `Approved` or `Implementation Ready`, or are paired with an approved companion source.
+- [ ] File naming matches the lowercase, hyphen-separated standard.
+- [ ] Document starts with a single Level 1 heading followed by Maturity Metadata.
+- [ ] Relative paths are correct and functional.
+- [ ] Requirement IDs are present where needed.
+- [ ] Affected documents are cross-referenced.
+- [ ] Compatibility and security impacts are stated.
+- [ ] The change is understandable without external chat history.
+- [ ] Documents cited for implementation decisions are `Approved` or `Implementation Ready`, or are paired with an approved companion source.

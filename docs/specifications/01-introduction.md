@@ -4,71 +4,39 @@
 
 **Status:** Draft.
 
-**Intended Use:** Planning and review guidance; do not treat as implementation-ready unless the status is promoted.
-
+**Intended Use:** Introduction and guide to the software requirements specifications for Lyra.
 
 ## Purpose
 
-Define the introduction area of Lyra so contributors share a stable, documented understanding before implementation.
+Define the introduction area of Lyra, setting the context of a voice-first orchestration system and establishing how contributors read and parse the specifications.
 
 ## Scope
 
-This chapter covers platform expectations, terminology, boundaries, and future requirement details related to introduction. It does not define executable implementation.
-
-## Status
-
-Draft foundation. Ready for review and expansion during product discovery.
-
-## Owner
-
-Lyra Architecture Team.
-
-## Revision History
-
-| Date | Version | Notes |
-| --- | --- | --- |
-| 2026-07-07 | 0.1 | Initial documentation-first bootstrap. |
-
-## Planned Sections
-
-* Goals and non-goals.
-* Requirement IDs and acceptance criteria.
-* Contract, event, and observability implications.
-* Security, privacy, and tenant-isolation considerations.
-
-## Future Work
-
-Expand this chapter with reviewed requirements, diagrams where useful, and links to ADRs once implementation planning begins.
-
-## References
-
-* `PROJECT.md`
-* `docs/decisions/`
+Covers platform boundaries, reading instructions, and document layout expectations.
 
 ## Business Motivation
 
-This chapter exists to keep Lyra safe for production voice orchestration by documenting intent before implementation.
+Lyra provides a standardized platform for conversational voice automation, solving integration complexity for enterprise software companies.
 
-## Definitions
+## Assumptions
 
-Use the domain language in `docs/specifications/08-domain-model.md`, `docs/glossary/README.md`, and `.ai/03-domain-model.md`.
+- Contributors have read `PROJECT.md`.
+- AI coding agents parse these chapters sequentially.
 
-## Requirements
+## Dependencies
 
-Requirement IDs in this chapter must use the conventions in `.ai/05-requirements-index.md` and `docs/standards/requirement-id-standards.md`.
+- None.
 
-## Acceptance Criteria
+## References
 
-A requirement is acceptable only when ownership boundaries, contract impact, observability impact, compatibility impact, and verification approach are clear.
+- [PROJECT.md](../../PROJECT.md)
+- [.ai/00-start-here.md](../../.ai/00-start-here.md)
 
-## Examples
+## Planned Requirement Categories
 
-Examples should be added or linked when they clarify expected contracts, events, workflows, failure handling, or operator behavior.
+- `LYRA-FR` (Functional Specifications)
+- `LYRA-NFR` (Non-Functional Specifications)
 
-## Open Questions
+## Future Expansion Guidance
 
-None recorded for this foundation revision. New questions must identify the affected requirement IDs and the document owner responsible for resolution.
-
-## Related ADRs
-
-See `docs/decisions/` for accepted architecture decisions that constrain this chapter.
+Detail introduction contexts and onboarding tools once the specification review phase begins.

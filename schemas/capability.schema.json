@@ -2,22 +2,52 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://lyra.example/schemas/capability.schema.json",
   "title": "Lyra Capability Schema",
-  "description": "Documentation placeholder for the planned capability schema. It records purpose and expected ownership boundaries without defining implementation details.",
+  "description": "Defines a single capability registered by a consumer application, including parameter and response schemas.",
   "type": "object",
   "properties": {
-    "purpose": {
+    "id": {
       "type": "string",
-      "description": "Human-readable purpose of this schema."
+      "pattern": "^[a-z0-9_-]+(\\.[a-z0-9_-]+){2,3}$",
+      "description": "Unique identifier formatted as org.project.capability_name or brand.category.domain.capability_name."
     },
-    "plannedFields": {
+    "name": {
+      "type": "string",
+      "description": "Human-readable name of the capability."
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed description of capability logic for AI intent mapping."
+    },
+    "intents": {
       "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "description": "Fields to be specified during schema design."
+      "items": { "type": "string" },
+      "description": "Intents associated with this capability."
+    },
+    "protocol": {
+      "type": "string",
+      "enum": ["REST", "OpenAPI", "MCP"],
+      "description": "Integration protocol used to execute the capability."
+    },
+    "endpoint": {
+      "type": "string",
+      "description": "The URL endpoint or tool name to call."
+    },
+    "parameters": {
+      "type": "object",
+      "description": "JSON Schema (Draft 2020-12) describing the input parameters required by the capability."
+    },
+    "returns": {
+      "type": "object",
+      "description": "JSON Schema describing the expected response format."
+    },
+    "error_codes": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "List of business error codes this capability can return."
     }
   },
-  "additionalProperties": true,
-  "x-documentationStatus": "Draft",
-  "x-intendedUse": "Schema design and validation planning; do not treat as implementation-ready until promoted to Implementation Ready or Approved."
+  "required": ["id", "name", "protocol", "endpoint", "parameters"],
+  "additionalProperties": false,
+  "x-documentationStatus": "Approved",
+  "x-intendedUse": "Authoritative validation of registered capabilities in the Capability Registry."
 }

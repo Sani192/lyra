@@ -4,37 +4,35 @@
 
 **Status:** Approved.
 
-**Intended Use:** Authoritative AI-agent operating context; safe for repository navigation and contribution workflow decisions.
-
+**Intended Use:** Authoritative AI-agent operating context; safe for repository navigation and code contribution decisions.
 
 ## Repository Philosophy
 
 Code should be introduced only after requirements and architecture are documented. Implementation should be small, observable, testable, and aligned with contract boundaries.
 
-## Folder Ownership
+## Language and Formatting Specifications
 
-Specifications belong in `docs/specifications/`, architecture in `docs/architecture/`, ADRs in `docs/decisions/`, engineering standards in `docs/engineering/`, schemas in `schemas/`, and examples in `examples/`.
+1. **Python 3.11+ Standards:**
+   - Static typing is mandatory. All functions must use standard PEP 484 type hints.
+   - Use `ruff` or `black` for auto-formatting. Line limit is 100 characters.
+   - Use `ruff` or `flake8` for linting. Bypassing linting errors with `# noqa` requires inline reviewer comments explaining the exception.
+
+2. **NLU & AI Integration Boundaries:**
+   - Never write logic that relies on LLM prompt outputs without explicit schema validation.
+   - All AI response parsing must be wrapped in `Pydantic` validation or standard JSON Schema validators.
 
 ## Dependency Rules
 
-Dependencies must have clear ownership, security posture, versioning strategy, and operational justification. Avoid dependencies that embed consumer-specific behavior.
+* **Explicit Locks:** All production dependencies must be locked using exact versions in dependency tracking files.
+* **Separation of Concerns:** Do not add libraries that bundle external business rules or domain policies.
 
-## Naming
+## Testing Expectations
 
-Use domain terms from `.ai/03-domain-model.md` and `docs/glossary/README.md`. Names should reveal ownership and lifecycle.
+* **Pytest Framework:** Write all backend verification suites using `pytest`.
+* **Traceable Assertions:** Test function names or metadata tags must cite the requirement ID being tested (e.g. `def test_session_lifecycle_compliance_LYRA_FR_001()`).
+* **Clean Mocking:** Do not perform network calls in unit tests. Use mock servers or integration adapters for testing capability endpoints.
 
-## Testing Philosophy
+## Related Standards
 
-Tests should prove contract behavior, boundary preservation, compatibility, observability, and failure handling. Tests must reference requirement IDs when they validate requirements.
-
-## Documentation Expectations
-
-Documentation changes accompany requirement, architecture, schema, contract, and behavior changes.
-
-## Versioning and Compatibility
-
-Use semantic versioning where applicable, explicit schema versions, deprecation notices, migration notes, and compatibility checks.
-
-## Refactoring Rules
-
-Refactors must preserve contracts, tests, requirement traceability, and public behavior unless a breaking change is documented and approved.
+- Complete Python style rules: [Coding Standards](../docs/engineering/coding-standards.md)
+- Branching and Git guidelines: [Branching Strategy](../docs/engineering/branching-strategy.md)

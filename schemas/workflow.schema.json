@@ -2,22 +2,55 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://lyra.example/schemas/workflow.schema.json",
   "title": "Lyra Workflow Schema",
-  "description": "Documentation placeholder for the planned workflow schema. It records purpose and expected ownership boundaries without defining implementation details.",
+  "description": "Defines an orchestration workflow or playbook representing the steps Lyra takes to resolve user intents.",
   "type": "object",
   "properties": {
-    "purpose": {
+    "workflow_id": {
       "type": "string",
-      "description": "Human-readable purpose of this schema."
+      "pattern": "^[a-z0-9_-]+$",
+      "description": "Unique identifier for the workflow playbook."
     },
-    "plannedFields": {
+    "name": {
+      "type": "string",
+      "description": "Human-readable name of the workflow."
+    },
+    "description": {
+      "type": "string",
+      "description": "Summary of the dialogue flow and business purpose."
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "intents": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "List of customer intents mapped to trigger this workflow."
+    },
+    "steps": {
       "type": "array",
       "items": {
-        "type": "string"
-      },
-      "description": "Fields to be specified during schema design."
+        "type": "object",
+        "properties": {
+          "step_id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["gather_entities", "invoke_capability", "conditional_branch", "escalate", "respond"]
+          },
+          "config": {
+            "type": "object",
+            "description": "Parameters, capability references, prompts, or conditional expressions."
+          }
+        },
+        "required": ["step_id", "type"],
+        "additionalProperties": true
+      }
     }
   },
-  "additionalProperties": true,
-  "x-documentationStatus": "Draft",
-  "x-intendedUse": "Schema design and validation planning; do not treat as implementation-ready until promoted to Implementation Ready or Approved."
+  "required": ["workflow_id", "name", "version", "intents", "steps"],
+  "additionalProperties": false,
+  "x-documentationStatus": "Approved",
+  "x-intendedUse": "Authoritative validation of playbooks and workflows loaded into the Conversation and Workflow Engines."
 }

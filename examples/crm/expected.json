@@ -1,15 +1,77 @@
 {
-  "example": "crm",
-  "purpose": "illustrative expected response shape",
-  "lyra_owns": [
-    "conversation",
-    "transcript",
-    "events"
-  ],
-  "consumer_owns": [
-    "business_state",
-    "business_rules"
-  ],
-  "documentation_status": "Draft",
-  "intended_use": "Illustrative example output for planning and contract review; not authoritative implementation test data until promoted."
+  "conversation_id": "b90e8a6b-c743-4b68-b8cf-91b470129403",
+  "tenant_id": "org.sales_force_network",
+  "project_id": "project.crm_assistant",
+  "status": "completed",
+  "created_at": "2026-07-07T10:15:00Z",
+  "updated_at": "2026-07-07T10:16:20Z",
+  "playbook_ref": "docs/playbooks/lead-qualification.md",
+  "turns": [
+    {
+      "turn_id": 1,
+      "timestamp": "2026-07-07T10:15:05Z",
+      "input": {
+        "type": "text",
+        "content": "Hi, I need to check the status of our sales lead at 'Apex Tech'."
+      },
+      "intent_detected": "search_leads",
+      "entities_extracted": {
+        "company_name": "Apex Tech"
+      },
+      "capabilities_invoked": [
+        {
+          "capability_id": "lyra.examples.crm.search_leads",
+          "request_payload": {
+            "company_name": "Apex Tech"
+          },
+          "response_payload": {
+            "leads": [
+              {
+                "lead_id": "LEAD-8871",
+                "name": "Apex Tech Sales Opportunity",
+                "status": "contacted",
+                "assigned_agent": "John Doe"
+              }
+            ]
+          },
+          "status": "success"
+        }
+      ],
+      "output": {
+        "type": "text",
+        "content": "I found a lead for 'Apex Tech' with ID LEAD-8871. The status is currently 'contacted' and it is assigned to John Doe. Would you like to update this stage?"
+      }
+    },
+    {
+      "turn_id": 2,
+      "timestamp": "2026-07-07T10:16:00Z",
+      "input": {
+        "type": "text",
+        "content": "Yes, we just completed the call. Let's mark it as 'qualified'."
+      },
+      "intent_detected": "update_lead",
+      "entities_extracted": {
+        "new_status": "qualified"
+      },
+      "capabilities_invoked": [
+        {
+          "capability_id": "lyra.examples.crm.update_lead_status",
+          "request_payload": {
+            "lead_id": "LEAD-8871",
+            "new_status": "qualified"
+          },
+          "response_payload": {
+            "lead_id": "LEAD-8871",
+            "updated_status": "qualified",
+            "status": "updated"
+          },
+          "status": "success"
+        }
+      ],
+      "output": {
+        "type": "text",
+        "content": "Perfect. The lead status for Apex Tech (LEAD-8871) has been updated to 'qualified'."
+      }
+    }
+  ]
 }

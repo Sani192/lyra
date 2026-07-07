@@ -4,76 +4,45 @@
 
 **Status:** Draft.
 
-**Intended Use:** Planning and review guidance; do not treat as implementation-ready unless the status is promoted.
-
+**Intended Use:** Planning functional specifications.
 
 ## Purpose
 
-Define the functional requirements area of Lyra so contributors share a stable, documented understanding before implementation.
+Define the functional requirements (FR) for the Lyra orchestration engine.
 
 ## Scope
 
-This chapter covers platform expectations, terminology, boundaries, and future requirement details related to functional requirements. It does not define executable implementation.
-
-## Status
-
-Draft foundation. Ready for review and expansion during product discovery.
-
-## Owner
-
-Lyra Architecture Team.
-
-## Revision History
-
-| Date | Version | Notes |
-| --- | --- | --- |
-| 2026-07-07 | 0.1 | Initial documentation-first bootstrap. |
-
-## Initial Requirements
-
-* `LYRA-FR-001`: Lyra shall orchestrate conversations without owning consumer business state.
-* `LYRA-FR-002`: Lyra shall invoke capabilities only through declared contracts.
-
-## Planned Sections
-
-* Goals and non-goals.
-* Requirement IDs and acceptance criteria.
-* Contract, event, and observability implications.
-* Security, privacy, and tenant-isolation considerations.
-
-## Future Work
-
-Expand this chapter with reviewed requirements, diagrams where useful, and links to ADRs once implementation planning begins.
-
-## References
-
-* `PROJECT.md`
-* `docs/decisions/`
+Applies to conversation session execution, slot-filling NLU logic, and registry routing rules.
 
 ## Business Motivation
 
-This chapter exists to keep Lyra safe for production voice orchestration by documenting intent before implementation.
+Ensures deterministic orchestration behavior at runtime.
 
-## Definitions
+## Assumptions
 
-Use the domain language in `docs/specifications/08-domain-model.md`, `docs/glossary/README.md`, and `.ai/03-domain-model.md`.
+- AI Agent Layer can successfully classify intents.
 
-## Requirements
+## Dependencies
 
-Requirement IDs in this chapter must use the conventions in `.ai/05-requirements-index.md` and `docs/standards/requirement-id-standards.md`.
+- None.
 
-## Acceptance Criteria
+## References
 
-A requirement is acceptable only when ownership boundaries, contract impact, observability impact, compatibility impact, and verification approach are clear.
+- [PROJECT.md](../../PROJECT.md)
+- [ADR-0001: Why Lyra Is Stateless](../decisions/ADR-0001.md)
+- [ADR-0002: Why Consumer Applications Own Business Logic](../decisions/ADR-0002.md)
 
-## Examples
+## Initial Requirements
 
-Examples should be added or linked when they clarify expected contracts, events, workflows, failure handling, or operator behavior.
+* **LYRA-FR-001:** Lyra shall orchestrate conversations without owning consumer business state.
+* **LYRA-FR-002:** Lyra shall invoke capabilities only through declared contracts.
 
-## Open Questions
+## Planned Requirement Categories
 
-None recorded for this foundation revision. New questions must identify the affected requirement IDs and the document owner responsible for resolution.
+- `LYRA-FR-SESS` (Session Lifecycle)
+- `LYRA-FR-ROUT` (Intent Routing)
+- `LYRA-FR-VAL` (Contract Validation)
 
-## Related ADRs
+## Future Expansion Guidance
 
-See `docs/decisions/` for accepted architecture decisions that constrain this chapter.
+Incorporate specific acceptance criteria and test targets for session handlers.

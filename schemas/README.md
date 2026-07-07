@@ -2,10 +2,9 @@
 
 ## Maturity Metadata
 
-**Status:** Draft.
+**Status:** Approved.
 
-**Intended Use:** Schema catalog and lifecycle planning; not safe as standalone implementation authority until underlying schemas are promoted.
-
+**Intended Use:** Authoritative schema catalog policy and index of registered validation schemas for Lyra components.
 
 ## Purpose
 

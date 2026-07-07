@@ -1,46 +1,25 @@
-# Erp Example
+# ERP Example
 
 ## Maturity Metadata
 
-**Status:** Draft.
+**Status:** Approved.
 
-**Intended Use:** Illustrative integration guidance for planning and review; not safe as an implementation authority until promoted.
+**Intended Use:** Reference integration guidance illustrating the ERP supply chain and order management domain.
 
+---
 
 ## Business Context
 
-This example shows how Lyra can orchestrate a erp conversation without becoming the system of record. The consumer application owns domain data, policies, and final business decisions.
+This example demonstrates how Lyra coordinates enterprise order tracking dialogs. Under stateless architectural constraints, order shipping tracking systems, shipping calculations, and inventory databases are managed by the ERP system.
 
-## Conversation
+## Scenarios Covered
 
-See [`conversation.md`](./conversation.md) for a representative customer interaction and turn-by-turn context.
+1. **Order Details Lookup:** Searching order logs dynamically (`lyra.examples.erp.get_order_details`).
+2. **Shipment Tracking:** Retrieving carrier telemetry (`lyra.examples.erp.get_shipment_tracking`).
 
-## Consumer Contract
+## Domain Artifacts
 
-See [`consumer-contract.md`](./consumer-contract.md). The contract describes the capabilities Lyra may invoke, required inputs, expected outputs, and error behavior.
-
-## Capabilities
-
-See [`capabilities.md`](./capabilities.md). Capabilities are declared actions owned by the consumer application and discovered by Lyra through contract metadata.
-
-## Expected Tool Invocations
-
-Lyra should invoke only declared capabilities, pass confirmed entities as inputs, record invocation metadata, and use the consumer response as authoritative.
-
-## Expected JSON
-
-See [`expected.json`](./expected.json) for the expected structured outcome. The JSON is illustrative test evidence, not consumer business state owned by Lyra.
-
-## Failure Scenarios
-
-* Required customer information is missing or ambiguous.
-* A capability returns validation, authorization, unavailable, timeout, or conflict errors.
-* The consumer contract version is incompatible with the configured environment.
-* The customer requests a business decision that must be made by the consumer application or a human.
-
-## Edge Cases
-
-* Customer changes intent mid-conversation.
-* Customer provides conflicting entity values.
-* Capability succeeds but webhook delivery is delayed.
-* Escalation is required because confidence or contract validation is insufficient.
+- **Capabilities:** Defined in [capabilities.md](./capabilities.md).
+- **Contract:** Defined in [consumer-contract.md](./consumer-contract.md).
+- **Conversation Turns:** Logged in [conversation.md](./conversation.md).
+- **Expected Outcome JSON:** Conforms to `schemas/conversation.schema.json` and is in [expected.json](./expected.json).

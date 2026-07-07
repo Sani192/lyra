@@ -2,38 +2,52 @@
 
 ## Maturity Metadata
 
-**Status:** Draft.
+**Status:** Approved.
 
-**Intended Use:** Planning and review guidance; do not treat as implementation-ready unless the status is promoted.
-
+**Intended Use:** Authoritative conversation lifecycle states and session transition rules for implementation.
 
 ## Purpose
 
-Describe Lyra's conversation lifecycle in a way that supports future implementation without committing to premature code-level choices.
+Define the state machine governing conversation sessions in Lyra, illustrating how sessions are initiated, coordinated, suspended, and terminated.
 
-## Design Goals
+## Conversation State Machine
 
-* Preserve Lyra's stateless relationship to consumer business domains.
-* Keep conversation orchestration separate from protocol adapters.
-* Make capability invocation observable, auditable, and contract-driven.
-* Support multi-tenant operation and least-privilege access.
+```mermaid
+stateDiagram-v2
+    [*] --> Init: Client Handshake
+    Init --> Active: Intent Detected / Playbook Selected
+    Active --> Active: Process Turn / Slot Filling
+    Active --> Suspended: Inactivity Timeout / Manual Hold
+    Suspended --> Active: User Activity Resume
+    Active --> Failed: Critical Error / Schema Invalidation
+    Active --> Completed: Playbook Flow Ends
+    Completed --> [*]
+    Failed --> [*]
+```
 
-## Future Diagrams Placeholder
+## Lifecycle States and Transitions
 
-Diagrams will be added under `docs/diagrams/` after the relevant specification and ADRs are approved.
+1. **Init (Initiated):**
+   - *Trigger:* Client connects via REST or WebSockets.
+   - *Action:* Lyra establishes a session UUID, loads tenant policies, and initializes empty slots.
 
-## Architecture Decisions
+2. **Active (Orchestrating):**
+   - *Trigger:* First intent classified. Playbook is selected.
+   - *Action:* Dialogue turns are processed sequentially. User input is transcribed, intent resolved, and capabilities are invoked as needed.
 
-Relevant decisions include ADR-0001 through ADR-0005. Future changes must add ADRs before implementation.
+3. **Suspended (Inactive):**
+   - *Trigger:* Session inactivity exceeds standard thresholds (e.g., 60 seconds of silence) or manual hold signal.
+   - *Action:* State is serialized to the session log. Prompt resources are released.
 
-## Open Questions
+4. **Completed (Terminated):**
+   - *Trigger:* Playbook flow finishes all required steps.
+   - *Action:* Transcripts are redacted and finalized. S3 audio records are closed.
 
-* Which operational metrics are required for production readiness?
-* What compatibility guarantees apply to contract evolution in this area?
-* Which tenant controls must be configurable per environment?
+5. **Failed (Aborted):**
+   - *Trigger:* Critical validation failure (e.g., consumer capability returns schema-invalid response) or repeated timeout.
+   - *Action:* System records failure event, emits notification to Observability, and closes connection.
 
-## References
+## Related Documents
 
-* `PROJECT.md`
-* `docs/specifications/`
-* `docs/decisions/`
+- Platform Layout: [System Overview](./system-overview.md)
+- Integration Details: [Capability Invocation](./capability-invocation.md)

@@ -4,27 +4,54 @@
 
 **Status:** Approved.
 
-**Intended Use:** Authoritative AI-agent operating context; safe for repository navigation and contribution workflow decisions.
+**Intended Use:** Authoritative AI-agent operating context; safe for repository navigation and architectural boundary verification.
 
+## Technology Stack
+
+Lyra is implemented using:
+- **Language:** Python 3.11+ (static typing enforced).
+- **Core Framework:** FastAPI for asynchronous REST endpoints.
+- **Validation Engine:** Pydantic and jsonschema.
+- **Database / Logs:** PostgreSQL for conversation metadata; S3 for transcripts and audio recordings.
 
 ## Major Components
 
-* Conversation Engine: manages turn-taking, context, transcripts, and session lifecycle.
-* AI Agent Layer: performs intent/entity extraction and response planning.
-* Capability Registry: discovers and describes available consumer actions.
-* Protocol Layer: adapts REST, OpenAPI, MCP, and webhooks to capability semantics.
-* Workflow Engine: coordinates playbooks, prompts, capability calls, and escalation.
-* Observability Layer: records events, decisions, invocations, errors, and audit evidence.
-* Contract Layer: validates consumer contracts, schemas, versions, and compatibility.
+1. **Protocol Adapters:** Expose REST, OpenAPI, and MCP endpoints, converting inbound audio/text into platform-neutral session events.
+2. **Conversation Engine:** Coordinates conversational turns, managing session context and persisting transcripts/recordings.
+3. **AI Agent Layer:** Performs NLU tasks (intent resolution, entity extraction, response prompt generation).
+4. **Workflow Engine:** Coordinates sequential logic defined in playbooks, handling multi-step processes and escalations.
+5. **Capability Registry:** Discovers and registers consumer contracts. Validates payload schemas at invocation boundaries.
+6. **Observability Layer:** Emits structured events for auditable tracing of all routing decisions and API calls.
+
+## Component Interaction Flow
+
+```
++----------+      1. Event      +--------------------+      2. Query      +----------------+
+|  Client  | ------------======>|  Protocol Adapter  | ==================>|  Conversation  |
++----------+                    +--------------------+                    |     Engine     |
+     ^                                                                    +-------+--------+
+     |                                                                            |
+     |                                                                            | 3. Get Context
+     |                                                                            v
+     |                          +--------------------+      4. Extract    +-------+--------+
+     | 7. Response              |   Workflow Engine  | <================= |    AI Agent    |
+     +------------------------- | (Execute Playbook) |                    |     Layer      |
+                                +---------+----------+                    +----------------+
+                                          |
+                                          | 5. Invoke (Validate)
+                                          v
+                                +---------+----------+      6. REST/MCP   +----------------+
+                                | CapabilityRegistry | ==================>|  Consumer API  |
+                                +--------------------+                    +----------------+
+```
 
 ## Boundaries and Data Ownership
 
-Lyra owns orchestration metadata. Consumer applications own business state and business decisions. Protocol adapters translate, but do not reinterpret, consumer business behavior.
+* **Lyra owns:** Orchestration metadata, turn logs, transcripts, audio recordings, capability contracts.
+* **Consumer owns:** Customer profiles, orders, inventories, transaction rules, pricing calculations.
 
-## Extension Points
+## Related Documents
 
-New protocols, capability metadata, observability sinks, workflow patterns, AI providers, and SDKs may be added if they preserve contract-driven boundaries.
-
-## Future Scalability
-
-The architecture should support multi-tenant isolation, horizontal scaling of stateless runtime services, event-driven processing, versioned contracts, and independent protocol adapter evolution.
+- Detailed component definitions: [Component Architecture](../docs/architecture/component-architecture.md)
+- Conversation flow details: [Conversation Lifecycle](../docs/architecture/conversation-lifecycle.md)
+- Invocation mechanics: [Capability Invocation](../docs/architecture/capability-invocation.md)

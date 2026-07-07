@@ -1,74 +1,39 @@
-# 12. Ai Agent
+# 12. AI Agent
 
 ## Maturity Metadata
 
 **Status:** Draft.
 
-**Intended Use:** Planning and review guidance; do not treat as implementation-ready unless the status is promoted.
-
+**Intended Use:** Design specifications for AI routing.
 
 ## Purpose
 
-Define the ai agent area of Lyra so contributors share a stable, documented understanding before implementation.
+Define the AI Agent Layer, intent matching, entity slot filling, and LLM orchestration.
 
 ## Scope
 
-This chapter covers platform expectations, terminology, boundaries, and future requirement details related to ai agent. It does not define executable implementation.
-
-## Status
-
-Draft foundation. Ready for review and expansion during product discovery.
-
-## Owner
-
-Lyra Architecture Team.
-
-## Revision History
-
-| Date | Version | Notes |
-| --- | --- | --- |
-| 2026-07-07 | 0.1 | Initial documentation-first bootstrap. |
-
-## Planned Sections
-
-* Goals and non-goals.
-* Requirement IDs and acceptance criteria.
-* Contract, event, and observability implications.
-* Security, privacy, and tenant-isolation considerations.
-
-## Future Work
-
-Expand this chapter with reviewed requirements, diagrams where useful, and links to ADRs once implementation planning begins.
-
-## References
-
-* `PROJECT.md`
-* `docs/decisions/`
+Covers natural language understanding (NLU) processing.
 
 ## Business Motivation
 
-This chapter exists to keep Lyra safe for production voice orchestration by documenting intent before implementation.
+Enables high intent match rates for voice input.
 
-## Definitions
+## Assumptions
 
-Use the domain language in `docs/specifications/08-domain-model.md`, `docs/glossary/README.md`, and `.ai/03-domain-model.md`.
+- LLMs support tool calling / function calling.
 
-## Requirements
+## Dependencies
 
-Requirement IDs in this chapter must use the conventions in `.ai/05-requirements-index.md` and `docs/standards/requirement-id-standards.md`.
+- None.
 
-## Acceptance Criteria
+## References
 
-A requirement is acceptable only when ownership boundaries, contract impact, observability impact, compatibility impact, and verification approach are clear.
+- [PROJECT.md](../../PROJECT.md)
 
-## Examples
+## Planned Requirement Categories
 
-Examples should be added or linked when they clarify expected contracts, events, workflows, failure handling, or operator behavior.
+- `LYRA-FR-AI` (AI Agent matching requirements)
 
-## Open Questions
+## Future Expansion Guidance
 
-None recorded for this foundation revision. New questions must identify the affected requirement IDs and the document owner responsible for resolution.
-
-## Related ADRs
-
-See `docs/decisions/` for accepted architecture decisions that constrain this chapter.
+Provide prompt templates and system instructions for target LLMs.

@@ -1,28 +1,38 @@
 # Review Process
 
+## Maturity Metadata
+
+**Status:** Approved.
+
+**Intended Use:** Authoritative standard guidelines for pull requests, self-reviews, approval levels, and artifact-specific Definition of Ready/Done gates for Lyra.
+
 ## Purpose
 
-Review process verifies requirement traceability, architectural boundary preservation, security/privacy impact, documentation quality, examples, and checks.
+Establish clear expectations for code and documentation reviews, pull request requirements, and specific checklists to verify requirement traceability, architectural boundary preservation, security/privacy impact, and implementation correctness before changes are merged.
 
 ## Scope
 
-Applies to all Lyra documentation and future implementation unless a more specific standard supersedes it.
+Applies to all pull requests, branches, and merges in the Lyra repository.
 
-## Standard
+## Pull Request Guidelines
 
-* Reference stable requirement IDs for requirement-impacting changes.
-* Preserve Lyra's stateless, contract-driven, protocol-agnostic boundary.
-* Keep consumer business logic and business state outside Lyra.
-* Update related specifications, ADRs, contracts, schemas, examples, and traceability notes together.
-* Prefer explicit ownership, lifecycle, validation, compatibility, and operational guidance.
-* Select every artifact-specific checklist that applies to the change. When a change spans categories, satisfy the strictest required documentation, tests, traceability, compatibility notes, and review evidence.
+1. **Self-Review:** Before submitting a PR, the author must review their own diff to ensure it contains no debug comments, print statements, or formatting violations.
+2. **Branch Isolation:** Changes must be developed in feature branches named according to the branching strategy and never committed directly to `main`.
+3. **Linear History:** Feature branches must be rebased against the latest `main` before submission. All merges to `main` must use squash-merging.
+4. **Traceability in Descriptions:** Every pull request description must list the targeted requirement IDs.
+5. **Review Roles:** The PR must be approved by the designated role owners (e.g., Product Owner, Architecture Owner) as defined in the governance model.
 
-## Review Checklist
+## General Review Checklist
 
-- Requirement IDs are present where needed.
-- Affected documents are cross-referenced.
-- Compatibility and security impacts are stated.
-- The change is understandable without external chat history.
+- [ ] All code changes trace directly back to active requirement IDs.
+- [ ] Pull request description explicitly lists the targeted requirement IDs.
+- [ ] Variable and function names follow PascalCase / snake_case rules.
+- [ ] Line lengths do not exceed 100 characters.
+- [ ] Imports are sorted and grouped correctly.
+- [ ] Comments are up to date and describe implementation rationale.
+- [ ] Affected documents are cross-referenced and markdown links are valid.
+- [ ] Compatibility, migration, and security impacts are explicitly stated.
+- [ ] The change is understandable without external chat history.
 
 ## Artifact-Specific Definition of Ready and Definition of Done
 

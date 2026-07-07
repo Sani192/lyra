@@ -1,15 +1,94 @@
 {
-  "example": "hotel",
-  "purpose": "illustrative expected response shape",
-  "lyra_owns": [
-    "conversation",
-    "transcript",
-    "events"
-  ],
-  "consumer_owns": [
-    "business_state",
-    "business_rules"
-  ],
-  "documentation_status": "Draft",
-  "intended_use": "Illustrative example output for planning and contract review; not authoritative implementation test data until promoted."
+  "conversation_id": "c90f8a6b-c743-4b68-b8cf-91b470129504",
+  "tenant_id": "org.luxury_stays",
+  "project_id": "project.booking_assistant",
+  "status": "completed",
+  "created_at": "2026-07-07T11:20:00Z",
+  "updated_at": "2026-07-07T11:21:40Z",
+  "playbook_ref": "docs/playbooks/reservation.md",
+  "turns": [
+    {
+      "turn_id": 1,
+      "timestamp": "2026-07-07T11:20:05Z",
+      "input": {
+        "type": "text",
+        "content": "Hi, I want to book a double room from July 20th to July 23rd."
+      },
+      "intent_detected": "request_booking",
+      "entities_extracted": {
+        "checkin_date": "2026-07-20",
+        "checkout_date": "2026-07-23",
+        "room_type": "double"
+      },
+      "capabilities_invoked": [
+        {
+          "capability_id": "lyra.examples.hotel.check_rooms",
+          "request_payload": {
+            "checkin_date": "2026-07-20",
+            "checkout_date": "2026-07-23",
+            "room_type": "double"
+          },
+          "response_payload": {
+            "available": true,
+            "price_per_night": 150.00,
+            "total_price": 450.00
+          },
+          "status": "success"
+        }
+      ],
+      "output": {
+        "type": "text",
+        "content": "A double room is available for those dates. The rate is $150 per night, totaling $450 for the 3 nights. Shall I reserve this for you?"
+      }
+    },
+    {
+      "turn_id": 2,
+      "timestamp": "2026-07-07T11:21:00Z",
+      "input": {
+        "type": "text",
+        "content": "Yes, please."
+      },
+      "intent_detected": "confirm_reservation",
+      "entities_extracted": {},
+      "capabilities_invoked": [],
+      "output": {
+        "type": "text",
+        "content": "Could you provide your name and email address to confirm the booking?"
+      }
+    },
+    {
+      "turn_id": 3,
+      "timestamp": "2026-07-07T11:21:35Z",
+      "input": {
+        "type": "text",
+        "content": "Sure, my name is Morgan Lee and my email is morgan@example.com."
+      },
+      "intent_detected": "provide_details",
+      "entities_extracted": {
+        "guest_name": "Morgan Lee",
+        "guest_email": "morgan@example.com"
+      },
+      "capabilities_invoked": [
+        {
+          "capability_id": "lyra.examples.hotel.book_room",
+          "request_payload": {
+            "checkin_date": "2026-07-20",
+            "checkout_date": "2026-07-23",
+            "room_type": "double",
+            "guest_name": "Morgan Lee",
+            "guest_email": "morgan@example.com"
+          },
+          "response_payload": {
+            "reservation_id": "HOT-78810",
+            "status": "confirmed"
+          },
+          "status": "success"
+        }
+      ],
+      "output": {
+        "type": "text",
+        "content": "Thank you, Morgan. Your double room is reserved from July 20th to July 23rd. Your reservation number is HOT-78810."
+      }
+    }
+  ]
 }

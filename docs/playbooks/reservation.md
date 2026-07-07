@@ -1,25 +1,37 @@
 # Reservation Playbook
 
+## Maturity Metadata
+
+**Status:** Approved.
+
+**Intended Use:** Dialogue orchestration guidance for hotel reservations.
+
 ## Goal
 
-Guide a customer through a reservation conversation while invoking only consumer-declared capabilities.
+Guide a customer through room selection, availability checks, and booking at a hotel.
 
 ## Conversation Strategy
 
-Confirm intent, gather required entities, validate through consumer capabilities, summarize outcomes, and capture transcript events.
+1. **Intake Dates:** Inquire about check-in/check-out dates and preferred room type (standard, double, suite).
+2. **Check Rooms:** Call `check_rooms` using parameters.
+3. **Present Quote:** State room availability and the total price for the stay.
+4. **Acquire Guest Info:** Gather guest name and email address.
+5. **Secure Booking:** Call `book_room` with confirmed parameters.
 
 ## Capability Usage
 
-Use the capability registry to discover eligible actions. Lyra must not infer business eligibility beyond contract responses.
+Query `check_rooms` and `book_room` capability endpoints. Never calculate room rates, sales taxes, or hotel discounts locally.
 
 ## Failure Recovery
 
-If a capability is unavailable, explain the limitation, retry when safe, offer alternatives declared by the consumer, or escalate.
+- **No Rooms:** Offer alternative dates or adjacent room types (e.g. "We don't have standard rooms left, but we have a double room open for an extra $20/night").
 
 ## Escalation
 
-Escalate when identity, safety, payment, policy ambiguity, or repeated capability failure prevents reliable completion.
+Transfer to front desk or hotel reception if:
+- The customer requests group discounts (5+ rooms).
+- The customer requests specific accessibility rooms or custom pets policies.
 
 ## Success Criteria
 
-The customer receives a clear outcome, the consumer application remains the source of truth, and Lyra records observable conversation and invocation events.
+A room booking is secured in the hotel PMS (Property Management System) and a reservation number is provided to the guest.

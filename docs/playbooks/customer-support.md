@@ -1,25 +1,38 @@
 # Customer Support Playbook
 
+## Maturity Metadata
+
+**Status:** Approved.
+
+**Intended Use:** Dialogue orchestration guidance for customer support routing.
+
 ## Goal
 
-Guide a customer through a customer support conversation while invoking only consumer-declared capabilities.
+Resolve customer inquiries about account status, orders, or support tickets using registered capabilities.
 
 ## Conversation Strategy
 
-Confirm intent, gather required entities, validate through consumer capabilities, summarize outcomes, and capture transcript events.
+1. **Verify Identity:** Authenticate the user by verifying their account email or security code.
+2. **Retrieve Case:** Call registered customer lookups to locate orders or support history.
+3. **Summarize Status:** Detail current ticket or package telemetry.
+4. **Trigger Action:** Execute state updates (e.g. resend confirmation email) if requested and supported.
 
 ## Capability Usage
 
-Use the capability registry to discover eligible actions. Lyra must not infer business eligibility beyond contract responses.
+Query `get_user_profile` or `get_ticket_details` endpoints. Never modify customer billing balances or security questions locally.
 
 ## Failure Recovery
 
-If a capability is unavailable, explain the limitation, retry when safe, offer alternatives declared by the consumer, or escalate.
+- **Account Not Found:** Clarify the email spelling or order number.
+- **Service Offline:** Apologize and offer to record a call-back ticket.
 
 ## Escalation
 
-Escalate when identity, safety, payment, policy ambiguity, or repeated capability failure prevents reliable completion.
+Escalate to a human support manager if:
+- The customer expresses high frustration.
+- The system is unable to authenticate the user after three attempts.
+- The issue requires financial refunds or security overrides.
 
 ## Success Criteria
 
-The customer receives a clear outcome, the consumer application remains the source of truth, and Lyra records observable conversation and invocation events.
+The user's query is answered or a verified escalation ticket is logged in the CRM system.

@@ -1,23 +1,67 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://lyra.example/schemas/contract.schema.json",
-  "title": "Lyra Contract Schema",
-  "description": "Documentation placeholder for the planned contract schema. It records purpose and expected ownership boundaries without defining implementation details.",
+  "title": "Lyra Consumer Contract Schema",
+  "description": "Defines the integration contract between a consumer application and Lyra, including security, versioning, and registered capabilities.",
   "type": "object",
   "properties": {
-    "purpose": {
+    "id": {
       "type": "string",
-      "description": "Human-readable purpose of this schema."
+      "description": "Unique contract identifier."
     },
-    "plannedFields": {
+    "organization_id": {
+      "type": "string",
+      "description": "The tenant organization ID."
+    },
+    "project_id": {
+      "type": "string",
+      "description": "The target project ID."
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "description": "Semantic version of the contract."
+    },
+    "capabilities": {
       "type": "array",
       "items": {
-        "type": "string"
+        "$ref": "capability.schema.json"
       },
-      "description": "Fields to be specified during schema design."
+      "description": "List of capabilities declared by this consumer."
+    },
+    "authentication": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["apiKey", "oauth2", "mutualTLS", "none"]
+        },
+        "config": {
+          "type": "object",
+          "description": "API key headers, OAuth2 scopes, or certificate configurations."
+        }
+      },
+      "required": ["type"],
+      "additionalProperties": true
+    },
+    "observability": {
+      "type": "object",
+      "properties": {
+        "webhook_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "events_enabled": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "required": ["webhook_url"],
+      "additionalProperties": false
     }
   },
-  "additionalProperties": true,
-  "x-documentationStatus": "Draft",
-  "x-intendedUse": "Schema design and validation planning; do not treat as implementation-ready until promoted to Implementation Ready or Approved."
+  "required": ["id", "organization_id", "project_id", "version", "capabilities", "authentication"],
+  "additionalProperties": false,
+  "x-documentationStatus": "Approved",
+  "x-intendedUse": "Authoritative validation of consumer contracts during registration and integration setup."
 }

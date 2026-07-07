@@ -1,15 +1,77 @@
 {
-  "example": "restaurant",
-  "purpose": "illustrative expected response shape",
-  "lyra_owns": [
-    "conversation",
-    "transcript",
-    "events"
-  ],
-  "consumer_owns": [
-    "business_state",
-    "business_rules"
-  ],
-  "documentation_status": "Draft",
-  "intended_use": "Illustrative example output for planning and contract review; not authoritative implementation test data until promoted."
+  "conversation_id": "c88f7a6b-c743-4b68-b8cf-81b470129201",
+  "tenant_id": "org.gourmet_group",
+  "project_id": "project.booking_assistant",
+  "status": "completed",
+  "created_at": "2026-07-07T19:00:00Z",
+  "updated_at": "2026-07-07T19:01:30Z",
+  "playbook_ref": "docs/playbooks/restaurant-ordering.md",
+  "turns": [
+    {
+      "turn_id": 1,
+      "timestamp": "2026-07-07T19:00:05Z",
+      "input": {
+        "type": "text",
+        "content": "Hi, I'd like to book a table for 4 people tonight at 7 PM."
+      },
+      "intent_detected": "request_booking",
+      "entities_extracted": {
+        "date": "2026-07-07",
+        "time": "19:00",
+        "guests": 4
+      },
+      "capabilities_invoked": [
+        {
+          "capability_id": "lyra.examples.restaurant.check_availability",
+          "request_payload": {
+            "date": "2026-07-07",
+            "time": "19:00",
+            "guests": 4
+          },
+          "response_payload": {
+            "available": true
+          },
+          "status": "success"
+        }
+      ],
+      "output": {
+        "type": "text",
+        "content": "Great news, we have availability at 7 PM. Can I get your name and phone number to finalize the reservation?"
+      }
+    },
+    {
+      "turn_id": 2,
+      "timestamp": "2026-07-07T19:01:15Z",
+      "input": {
+        "type": "text",
+        "content": "Sure, it's Alex Smith and my number is 555-0199."
+      },
+      "intent_detected": "provide_details",
+      "entities_extracted": {
+        "customer_name": "Alex Smith",
+        "customer_phone": "555-0199"
+      },
+      "capabilities_invoked": [
+        {
+          "capability_id": "lyra.examples.restaurant.create_booking",
+          "request_payload": {
+            "date": "2026-07-07",
+            "time": "19:00",
+            "guests": 4,
+            "customer_name": "Alex Smith",
+            "customer_phone": "555-0199"
+          },
+          "response_payload": {
+            "booking_id": "RES-82910",
+            "status": "confirmed"
+          },
+          "status": "success"
+        }
+      ],
+      "output": {
+        "type": "text",
+        "content": "Perfect. Your table for 4 is booked tonight at 7 PM. Your reservation code is RES-82910. We look forward to seeing you!"
+      }
+    }
+  ]
 }

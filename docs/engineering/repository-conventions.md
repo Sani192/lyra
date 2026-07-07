@@ -1,24 +1,36 @@
 # Repository Conventions
 
+## Maturity Metadata
+
+**Status:** Approved.
+
+**Intended Use:** Authoritative conventions for directory layouts, file naming, and markdown documentation styling.
+
 ## Purpose
 
-Repository conventions define stable paths, predictable filenames, numbered specifications, ADR naming, schema ownership, and example structure.
+Define the structure, file naming patterns, and documentation styling conventions that keep the repository predictable, clean, and highly indexable by both humans and AI agents.
 
 ## Scope
 
-Applies to all Lyra documentation and future implementation unless a more specific standard supersedes it.
+Applies to all files and folders in the repository.
 
-## Standard
+## Directory Structure and Naming
 
-* Reference stable requirement IDs for requirement-impacting changes.
-* Preserve Lyra's stateless, contract-driven, protocol-agnostic boundary.
-* Keep consumer business logic and business state outside Lyra.
-* Update related specifications, ADRs, contracts, schemas, examples, and traceability notes together.
-* Prefer explicit ownership, lifecycle, validation, compatibility, and operational guidance.
+1. **Directories:** Lowercase with hyphens or underscores (e.g., `docs/specifications/`, `docs/decisions/`).
+2. **Markdown Files:** Lowercase and kebab-case (e.g., `docs/engineering/testing-strategy.md`). Numerical prefixes should be used where a logical sequence exists (e.g., `.ai/00-start-here.md`).
+3. **JSON Schemas:** Named after their core entity using `.schema.json` suffix (e.g., `schemas/capability.schema.json`).
+4. **Implementation Files:** Standard naming according to language norms (snake_case for Python).
+
+## Markdown Styling Conventions
+
+* **Headings:** Use standard ATX headings (`#`, `##`, `###`) rather than Setext underlines.
+* **Alerts:** Use standard GitHub alertsstrategic format (`> [!NOTE]`, `> [!IMPORTANT]`, `> [!WARNING]`, `> [!CAUTION]`) to call out metadata and constraints.
+* **Maturity Metadata:** Must occupy lines 3-7 in all major documentation files.
+* **Cross-References:** Use standard Markdown links. Always use relative paths with forward slashes (e.g., `[Branching Strategy](../engineering/branching-strategy.md)`). Do not use absolute paths.
 
 ## Review Checklist
 
-- Requirement IDs are present where needed.
-- Affected documents are cross-referenced.
-- Compatibility and security impacts are stated.
-- The change is understandable without external chat history.
+- [ ] File and directory names conform to casing standards.
+- [ ] Maturity metadata section is included near the top of the file.
+- [ ] No broken relative links are introduced.
+- [ ] All cross-references use relative paths.

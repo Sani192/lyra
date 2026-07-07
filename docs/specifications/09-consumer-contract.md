@@ -4,71 +4,37 @@
 
 **Status:** Draft.
 
-**Intended Use:** Planning and review guidance; do not treat as implementation-ready unless the status is promoted.
-
+**Intended Use:** Integration setup specifications.
 
 ## Purpose
 
-Define the consumer contract area of Lyra so contributors share a stable, documented understanding before implementation.
+Define the rules for registering and validating consumer contracts, ensuring third-party APIs conform to required parameters.
 
 ## Scope
 
-This chapter covers platform expectations, terminology, boundaries, and future requirement details related to consumer contract. It does not define executable implementation.
-
-## Status
-
-Draft foundation. Ready for review and expansion during product discovery.
-
-## Owner
-
-Lyra Architecture Team.
-
-## Revision History
-
-| Date | Version | Notes |
-| --- | --- | --- |
-| 2026-07-07 | 0.1 | Initial documentation-first bootstrap. |
-
-## Planned Sections
-
-* Goals and non-goals.
-* Requirement IDs and acceptance criteria.
-* Contract, event, and observability implications.
-* Security, privacy, and tenant-isolation considerations.
-
-## Future Work
-
-Expand this chapter with reviewed requirements, diagrams where useful, and links to ADRs once implementation planning begins.
-
-## References
-
-* `PROJECT.md`
-* `docs/decisions/`
+Covers JSON Schema validation and authentication parameters.
 
 ## Business Motivation
 
-This chapter exists to keep Lyra safe for production voice orchestration by documenting intent before implementation.
+Ensures integration safety and backward compatibility of consumer interfaces.
 
-## Definitions
+## Assumptions
 
-Use the domain language in `docs/specifications/08-domain-model.md`, `docs/glossary/README.md`, and `.ai/03-domain-model.md`.
+- Contracts are uploaded in JSON/YAML format.
 
-## Requirements
+## Dependencies
 
-Requirement IDs in this chapter must use the conventions in `.ai/05-requirements-index.md` and `docs/standards/requirement-id-standards.md`.
+- Capability Registry configuration.
 
-## Acceptance Criteria
+## References
 
-A requirement is acceptable only when ownership boundaries, contract impact, observability impact, compatibility impact, and verification approach are clear.
+- [PROJECT.md](../../PROJECT.md)
+- [ADR-0003: Why Integrations Are Contract-Driven](../decisions/ADR-0003.md)
 
-## Examples
+## Planned Requirement Categories
 
-Examples should be added or linked when they clarify expected contracts, events, workflows, failure handling, or operator behavior.
+- `LYRA-FR-CC` (Consumer contract registration requirements)
 
-## Open Questions
+## Future Expansion Guidance
 
-None recorded for this foundation revision. New questions must identify the affected requirement IDs and the document owner responsible for resolution.
-
-## Related ADRs
-
-See `docs/decisions/` for accepted architecture decisions that constrain this chapter.
+Provide examples of contract migration and version upgrade validation guidelines.

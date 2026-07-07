@@ -19,9 +19,17 @@ Documents with `Approved` or `Implementation Ready` status are safe to use for i
 | Area | Documents | Status | Notes |
 | --- | --- | --- | --- |
 | Project constitution | `PROJECT.md` | Approved | Mandatory repository policy and maturity model. |
+| Governance Framework | `docs/governance/*.md`, `docs/governance/README.md` | Approved | Authoritative processes, workflows, and roles for repository management. |
 | Documentation standards | `docs/engineering/documentation-standards.md` | Approved | Authoritative status and intended-use rules. |
-| Architecture decisions | `docs/decisions/ADR-0001.md` through `docs/decisions/ADR-0005.md` | Approved | Accepted ADRs are safe within their documented scope. |
+| Review process | `docs/engineering/review-process.md` | Approved | Authoritative checklists. |
+| Specific standards | `docs/engineering/*.md` | Approved | Consolidated engineering, style, naming, branching, and commit guidelines. |
+| Architecture decisions | `docs/decisions/ADR-0001.md` through `docs/decisions/ADR-0006.md` | Approved | Accepted ADRs are safe within their documented scope. |
 | ADR creation | `docs/decisions/ADR-template.md` | Implementation Ready | Safe template for new ADRs. |
+| Core architecture | `system-overview.md`, `component-architecture.md`, `conversation-lifecycle.md`, `capability-invocation.md`, `caching.md`, `deployment-architecture.md`, `event-architecture.md`, `integration-layer.md`, `multi-tenancy.md`, `scalability.md`, `security-architecture.md`, `storage-strategy.md`, `voice-pipeline.md` | Approved | Independent, production-grade architectural design specifications. |
+| JSON Schemas | `schemas/*.schema.json`, `schemas/README.md` | Approved | Machine-readable validation rules. |
+| Domain examples | `examples/*/*.md`, `examples/*/expected.json` | Approved | Realistic integration flows and sample payloads. |
+| Playbooks | `docs/playbooks/*.md` | Approved | Scenario-specific AI execution flows. |
+| Glossary | `docs/glossary/README.md` | Approved | Definitive terminology index. |
 | AI Knowledge Center | `.ai/*.md` | Approved | Safe for AI-agent workflow, repository navigation, and contribution process decisions. |
 
 ## Not Safe as Standalone Implementation Authority Yet
@@ -29,9 +37,6 @@ Documents with `Approved` or `Implementation Ready` status are safe to use for i
 | Area | Documents | Current Status | Intended Use |
 | --- | --- | --- | --- |
 | Specifications | `docs/specifications/*.md` | Draft | Product and platform planning; promote before implementation. |
-| Architecture narratives | `docs/architecture/*.md` | Draft | Architecture planning; pair with approved ADRs before implementation. |
-| Schemas | `schemas/*.json`, `schemas/README.md` | Draft | Schema design and validation planning; promote before implementation. |
-| Domain examples | `examples/*/*.md`, `examples/*/expected.json` | Draft | Illustrative integration guidance and review examples; not authoritative test data yet. |
 
 ## Maintenance
 

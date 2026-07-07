@@ -2,22 +2,53 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://lyra.example/schemas/organization.schema.json",
   "title": "Lyra Organization Schema",
-  "description": "Documentation placeholder for the planned organization schema. It records purpose and expected ownership boundaries without defining implementation details.",
+  "description": "Defines tenant configurations, including names, active status, and custom security/privacy policies.",
   "type": "object",
   "properties": {
-    "purpose": {
+    "organization_id": {
       "type": "string",
-      "description": "Human-readable purpose of this schema."
+      "pattern": "^[a-z0-9_-]+$",
+      "description": "Unique URL-safe identifier for the organization."
     },
-    "plannedFields": {
+    "name": {
+      "type": "string",
+      "description": "Display name of the organization."
+    },
+    "projects": {
       "type": "array",
-      "items": {
-        "type": "string"
+      "items": { "type": "string" },
+      "description": "List of active projects registered under the organization."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["active", "suspended"],
+      "description": "Lifecycle state of the organization."
+    },
+    "security_policies": {
+      "type": "object",
+      "properties": {
+        "transcript_retention_days": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "recording_retention_days": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "allowed_protocols": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["REST", "OpenAPI", "MCP"]
+          }
+        }
       },
-      "description": "Fields to be specified during schema design."
+      "required": ["transcript_retention_days", "recording_retention_days", "allowed_protocols"],
+      "additionalProperties": false
     }
   },
-  "additionalProperties": true,
-  "x-documentationStatus": "Draft",
-  "x-intendedUse": "Schema design and validation planning; do not treat as implementation-ready until promoted to Implementation Ready or Approved."
+  "required": ["organization_id", "name", "status", "security_policies"],
+  "additionalProperties": false,
+  "x-documentationStatus": "Approved",
+  "x-intendedUse": "Authoritative validation of tenant configurations loaded into the administration panel."
 }

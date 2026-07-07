@@ -1,25 +1,36 @@
 # Payment Followup Playbook
 
+## Maturity Metadata
+
+**Status:** Approved.
+
+**Intended Use:** Dialogue orchestration guidance for payment reminder and tracking flows.
+
 ## Goal
 
-Guide a customer through a payment followup conversation while invoking only consumer-declared capabilities.
+Notify a customer of an overdue invoice, confirm payment details, and record the payment follow-up status in the ERP billing system.
 
 ## Conversation Strategy
 
-Confirm intent, gather required entities, validate through consumer capabilities, summarize outcomes, and capture transcript events.
+1. **Verify Identity:** Authenticate the user by verifying their customer ID and invoice number.
+2. **State Balance:** Detail the outstanding invoice amounts and dates.
+3. **Collect Status:** Inquire if the invoice has been paid or if they want to pay now.
+4. **Log Resolution:** Call `update_invoice_status` to log their response.
 
 ## Capability Usage
 
-Use the capability registry to discover eligible actions. Lyra must not infer business eligibility beyond contract responses.
+Never store credit card or bank details in Lyra. Direct customers to secure PCI-compliant gateways via external links or protocol-isolated IVR transfers.
 
 ## Failure Recovery
 
-If a capability is unavailable, explain the limitation, retry when safe, offer alternatives declared by the consumer, or escalate.
+- **Invoice Dispute:** If the customer disagrees with the balance, mark the invoice as "disputed" in the ERP capability call and log their feedback in notes.
 
 ## Escalation
 
-Escalate when identity, safety, payment, policy ambiguity, or repeated capability failure prevents reliable completion.
+Transfer to the collections or billing department if:
+- The customer requests payment extensions or budget arrangements.
+- The customer refuses to pay or threatens legal action.
 
 ## Success Criteria
 
-The customer receives a clear outcome, the consumer application remains the source of truth, and Lyra records observable conversation and invocation events.
+The invoice record is updated in the ERP system with follow-up metadata (e.g. "promised to pay by July 15th").

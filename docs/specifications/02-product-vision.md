@@ -4,71 +4,36 @@
 
 **Status:** Draft.
 
-**Intended Use:** Planning and review guidance; do not treat as implementation-ready unless the status is promoted.
-
+**Intended Use:** Planning product goals and target capabilities.
 
 ## Purpose
 
-Define the product vision area of Lyra so contributors share a stable, documented understanding before implementation.
+Define the product vision, core product value, target markets, and non-goals.
 
 ## Scope
 
-This chapter covers platform expectations, terminology, boundaries, and future requirement details related to product vision. It does not define executable implementation.
-
-## Status
-
-Draft foundation. Ready for review and expansion during product discovery.
-
-## Owner
-
-Lyra Architecture Team.
-
-## Revision History
-
-| Date | Version | Notes |
-| --- | --- | --- |
-| 2026-07-07 | 0.1 | Initial documentation-first bootstrap. |
-
-## Planned Sections
-
-* Goals and non-goals.
-* Requirement IDs and acceptance criteria.
-* Contract, event, and observability implications.
-* Security, privacy, and tenant-isolation considerations.
-
-## Future Work
-
-Expand this chapter with reviewed requirements, diagrams where useful, and links to ADRs once implementation planning begins.
-
-## References
-
-* `PROJECT.md`
-* `docs/decisions/`
+Applies to platform design and capabilities mapping.
 
 ## Business Motivation
 
-This chapter exists to keep Lyra safe for production voice orchestration by documenting intent before implementation.
+Enables companies to spin up voice-based automated customer service agents in under a day using their existing REST/OpenAPI microservices.
 
-## Definitions
+## Assumptions
 
-Use the domain language in `docs/specifications/08-domain-model.md`, `docs/glossary/README.md`, and `.ai/03-domain-model.md`.
+- Target customers have pre-existing API services that handle business transactions.
 
-## Requirements
+## Dependencies
 
-Requirement IDs in this chapter must use the conventions in `.ai/05-requirements-index.md` and `docs/standards/requirement-id-standards.md`.
+- None.
 
-## Acceptance Criteria
+## References
 
-A requirement is acceptable only when ownership boundaries, contract impact, observability impact, compatibility impact, and verification approach are clear.
+- [PROJECT.md](../../PROJECT.md)
 
-## Examples
+## Planned Requirement Categories
 
-Examples should be added or linked when they clarify expected contracts, events, workflows, failure handling, or operator behavior.
+- `LYRA-FR` (Functional Requirements for Vision)
 
-## Open Questions
+## Future Expansion Guidance
 
-None recorded for this foundation revision. New questions must identify the affected requirement IDs and the document owner responsible for resolution.
-
-## Related ADRs
-
-See `docs/decisions/` for accepted architecture decisions that constrain this chapter.
+Provide competitive landscape research and concrete success metrics for target metrics.

@@ -1,13 +1,30 @@
-# Sample Capability List
+# ERP Order and Tracking Capabilities
 
 ## Maturity Metadata
 
-**Status:** Draft.
+**Status:** Approved.
 
-**Intended Use:** Illustrative integration guidance for planning and review; not safe as an implementation authority until promoted.
+**Intended Use:** Reference integration guidance demonstrating capability declarations for the ERP/enterprise inventory domain.
 
+---
 
-* Lookup available actions.
-* Validate customer-provided details.
-* Create or update records in the consumer system only through declared capabilities.
-* Return authoritative success or failure responses.
+### 1. `lyra.examples.erp.get_order_details`
+- **Description:** Retrieve billing and shipping status for a specific enterprise order ID.
+- **Parameters:**
+  - `order_id`: String (Pattern: `^ORD-[0-9]+$`, required)
+  - `zip_code`: String (for security verification, required)
+- **Returns:**
+  - `order_id`: String
+  - `status`: String (Enum: `["processing", "shipped", "delivered", "cancelled"]`)
+  - `items`: Array of strings
+  - `total_price`: Number
+
+### 2. `lyra.examples.erp.get_shipment_tracking`
+- **Description:** Queries real-time shipping carrier telemetry for a specific order.
+- **Parameters:**
+  - `order_id`: String (required)
+- **Returns:**
+  - `tracking_number`: String
+  - `carrier`: String (e.g. `FedEx`, `UPS`)
+  - `status`: String (e.g. `In Transit`, `Out for Delivery`)
+  - `estimated_delivery`: String (Format: `date-time`)

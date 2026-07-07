@@ -1,23 +1,52 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://lyra.example/schemas/event.schema.json",
-  "title": "Lyra Event Schema",
-  "description": "Documentation placeholder for the planned event schema. It records purpose and expected ownership boundaries without defining implementation details.",
+  "title": "Lyra Platform Event Schema",
+  "description": "Defines the event structure emitted by Lyra for audit trails, logging, and observability webhooks.",
   "type": "object",
   "properties": {
-    "purpose": {
+    "event_id": {
       "type": "string",
-      "description": "Human-readable purpose of this schema."
+      "format": "uuid",
+      "description": "Unique UUID for the event instance."
     },
-    "plannedFields": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "description": "Fields to be specified during schema design."
+    "conversation_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Associated conversation session UUID."
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the event was emitted."
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "conversation.started",
+        "intent.detected",
+        "capability.invoked",
+        "capability.failed",
+        "conversation.completed"
+      ],
+      "description": "The event category type."
+    },
+    "tenant_id": {
+      "type": "string",
+      "description": "Tenant organization ID."
+    },
+    "payload": {
+      "type": "object",
+      "description": "Event-specific key-value payload containing trace metadata."
+    },
+    "actor": {
+      "type": "string",
+      "enum": ["system", "user", "agent"],
+      "description": "The entity that initiated the action."
     }
   },
-  "additionalProperties": true,
-  "x-documentationStatus": "Draft",
-  "x-intendedUse": "Schema design and validation planning; do not treat as implementation-ready until promoted to Implementation Ready or Approved."
+  "required": ["event_id", "conversation_id", "timestamp", "type", "tenant_id", "payload", "actor"],
+  "additionalProperties": false,
+  "x-documentationStatus": "Approved",
+  "x-intendedUse": "Authoritative validation of observability events pushed to logging pipelines and webhooks."
 }

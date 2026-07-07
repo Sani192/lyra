@@ -6,6 +6,10 @@
 
 **Intended Use:** Authoritative project constitution and repository policy; safe for implementation decisions about Lyra boundaries, workflows, and documentation maturity.
 
+**Last Updated:** 2026-07-07
+
+**Version:** 1.1.0
+
 ## Status
 
 Approved and authoritative. This document is mandatory reading for every human contributor and AI coding agent before changing the repository.
@@ -28,7 +32,9 @@ Lyra should become the neutral orchestration layer between conversational AI and
 
 ## Architecture Philosophy
 
-Lyra owns conversation orchestration, runtime coordination, transcripts, recordings, analytics, contracts, capability invocation metadata, and observability. Consumer applications own customers, orders, inventory, appointments, payments, loyalty state, pricing, policies, and business rules. Conversation state is not business state.
+* Lyra owns conversation orchestration, runtime coordination, transcripts, recordings, analytics, contracts, capability invocation metadata, and observability.
+* Consumer applications own customers, orders, inventory, appointments, payments, loyalty state, pricing, policies, and business rules.
+* Conversation state is not business state.
 
 ## Repository Philosophy
 
@@ -79,7 +85,6 @@ A change is ready for implementation only when the relevant requirement IDs, aff
 
 A change is done only when documentation is updated, requirement IDs are traceable, tests/checks are recorded, compatibility impact is documented, examples are updated when behavior is visible, and reviewers can understand the change without external context.
 
-
 ## Artifact-Specific Readiness and Done Criteria
 
 The repository-wide Definition of Ready and Definition of Done are specialized by artifact type in `docs/engineering/review-process.md`. Contributors must use the applicable artifact-specific checklist for requirement changes, architecture changes, ADRs, schema changes, contract changes, examples/playbooks, backend implementation, frontend implementation, SDK implementation, and security-sensitive changes.
@@ -108,17 +113,25 @@ Human contributors should use the same standards as AI agents: write down decisi
 
 | Path | Purpose |
 | --- | --- |
-| `.ai/` | Mandatory numbered AI Knowledge Center and operating guide, including `.ai/10-implementation-readiness.md` as the implementation-readiness gate; unnumbered files are compatibility redirects only. |
+| `.ai/` | Mandatory numbered AI Knowledge Center and operating guide, including `.ai/10-implementation-readiness.md` as the implementation-readiness gate. |
 | `docs/specifications/` | Numbered product, platform, API, security, observability, deployment, and UI requirements. |
-| `docs/architecture/` | Component, lifecycle, protocol, storage, security, scalability, and deployment architecture. |
-| `docs/contracts/` | Consumer contract guidance and integration expectations. |
+| `docs/architecture/` | Independent, production-grade architectural design specifications for platform components, events, scalability, and security. |
 | `docs/decisions/` | Architecture Decision Records. |
-| `docs/engineering/` | Engineering standards for coding, documentation, versioning, branching, review, testing, conventions, and traceability. |
+| `docs/engineering/` | Consolidated engineering standards including coding style, formatting, branching, naming, review processes, versioning, and traceability. |
 | `docs/traceability/` | Requirement-to-delivery traceability model. |
+| `docs/api/` | API contract references and protocol adapter specifications. |
+| `docs/deployment/` | Deployment environments, Kubernetes configs, and deployment guides. |
+| `docs/diagrams/` | Visual architectural and flow diagrams. |
+| `docs/examples/` | Domain example references and validation instructions. |
+| `docs/glossary/` | Centralized terminology definition sheet. |
+| `docs/playbooks/` | Scenario-specific AI execution scripts and prompt flows. |
+| `docs/security/` | Threat modeling, authentication protocols, and isolation rules. |
+| `docs/vision/` | Product scope, target personas, and roadmap narratives. |
 | `examples/` | Domain examples demonstrating contracts, conversations, capabilities, expected JSON, and failure cases. |
 | `schemas/` | JSON schemas for contracts, capabilities, conversations, events, organizations, and workflows. |
 | `backend/`, `frontend/`, `sdk/` | Reserved implementation areas; do not add business logic without explicit implementation approval. |
-
+| `tools/` | Automated platform validation tools, schema linter scripts. |
+| `scripts/` | Development utility and onboarding automation scripts. |
 
 ## Repository Maturity Model
 
@@ -138,7 +151,6 @@ Major documentation files under `docs/specifications/`, `docs/architecture/`, `d
 
 Implementation work may rely on `Approved` or `Implementation Ready` documents. `Review Ready` documents may inform implementation only when the pull request cites the approved companion source that resolves the relevant decision. `Placeholder`, `Draft`, `Deprecated`, and `Superseded` documents must not be used as standalone implementation authority.
 
-
 ## Governance
 
 Governance defines which repository artifacts have authority, who must approve material changes, how conflicts are resolved, and when work may move from specification to implementation. It supplements the review evidence required by `docs/engineering/review-process.md` and the requirement-to-delivery chain defined in `docs/traceability/README.md`.
@@ -150,10 +162,11 @@ Authoritative decisions must be made from the highest applicable source in this 
 1. `PROJECT.md` establishes repository-wide mission, boundaries, contribution rules, maturity rules, and governance.
 2. Approved `.ai/` operating documents establish AI-agent workflow, implementation-readiness checks, and repository navigation rules.
 3. Approved or Implementation Ready specifications in `docs/specifications/` establish product, platform, API, security, observability, deployment, and UI requirements.
-4. Approved ADRs in `docs/decisions/` establish architectural decisions and accepted tradeoffs.
-5. Approved schemas in `schemas/` and contract guidance in `docs/contracts/` establish machine-readable contract constraints and integration expectations.
-6. Approved examples in `examples/` demonstrate expected usage, safe integration patterns, and failure cases but do not create requirements by themselves.
-7. Implementation in `backend/`, `frontend/`, `sdk/`, and related source areas demonstrates current behavior but must be corrected when it conflicts with authoritative documentation.
+4. Approved architectural design specifications in `docs/architecture/` establish components boundaries, lifecycle state machines, and protocols adapter specifications.
+5. Approved ADRs in `docs/decisions/` establish architectural decisions and accepted tradeoffs.
+6. Approved schemas in `schemas/` and contract guidance in `docs/contracts/` establish machine-readable contract constraints and integration expectations.
+7. Approved examples in `examples/` demonstrate expected usage, safe integration patterns, and failure cases but do not create requirements by themselves.
+8. Implementation in `backend/`, `frontend/`, `sdk/`, and related source areas demonstrates current behavior but must be corrected when it conflicts with authoritative documentation.
 
 Lower-authority artifacts may clarify higher-authority documents, but they must not override them. If a lower-authority artifact appears to add, remove, or contradict a requirement, reviewers must classify the change and update the higher-authority source first.
 
@@ -161,13 +174,13 @@ Lower-authority artifacts may clarify higher-authority documents, but they must 
 
 Changes require reviewers with authority over the highest-impact classification involved:
 
-| Change area | Required approvers |
-| --- | --- |
-| Specifications | Product owner or specification maintainer, plus engineering reviewer when implementation impact exists. |
-| ADRs | Architecture owner or designated technical lead, plus maintainers of affected components. |
-| Schemas and contracts | Contract/API owner, schema maintainer, and compatibility reviewer. |
-| Security-sensitive changes | Security reviewer, architecture owner when boundaries change, and affected component maintainer. |
-| Public API changes | API owner, compatibility reviewer, documentation reviewer, and affected SDK or integration maintainer when applicable. |
+| Change area | Required approvers | Designated Role Assignments |
+| --- | --- | --- |
+| Specifications | Product owner or designated Product Managers, plus Engineering Lead. | **Product Owner:** `@Sani192`<br>**Product Manager:** `@PM_Lyra` |
+| ADRs | Architecture owner or designated Technical Leads, plus component maintainers. | **Architecture Owner:** `@Sani192`<br>**Architectural Board:** `@Arch_Guild` |
+| Schemas and contracts | Schema owner, API Lead, and designated Integration Reviewers. | **Schema & API Owner:** `@Sani192`<br>**Integration Lead:** `@API_Lead` |
+| Security-sensitive changes | Security owner, plus Architecture Owner when boundaries change. | **Security Owner:** `@Sani192`<br>**Security Auditor:** `@Sec_Auditor` |
+| Public API changes | API owner, SDK Maintainer, and designated Technical Writers. | **API Owner:** `@Sani192`<br>**Tech Writer:** `@Docs_Lead` |
 
 When one change spans multiple areas, all applicable approver groups are required. Reviewers must verify the review checklist in `docs/engineering/review-process.md` and ensure traceability evidence is complete according to `docs/traceability/README.md`.
 
@@ -212,6 +225,21 @@ Work may move from specification to implementation only after all applicable gat
 
 A change that fails any gate is not ready for implementation. If implementation already exists and governance evidence is missing, the next change must either add the missing evidence or roll the behavior back behind an approved plan.
 
+### Constitution Amendment Procedure
+
+Amending `PROJECT.md` is classified as an **Architecture-changing** modification. Any change to this document must:
+1. File an issue outlining the constitutional gap or conflict.
+2. Draft the proposed change in a feature branch.
+3. Obtain unanimous approval from the designated Architecture Owner (`@Sani192`) and Product Owner (`@Sani192`).
+4. Record the version bump and date in the Revision History of this document.
+
 ## Quality Standards
 
 All repository content must be accurate, cross-referenced, professionally written, and useful to a future contributor. Placeholder text, unexplained TODOs, broken links, and ambiguous ownership are not acceptable.
+
+## Revision History
+
+| Date | Version | Author | Notes |
+| --- | --- | --- | --- |
+| 2026-07-07 | 1.1.0 | Lyra Architecture Team | Consolidate standards under engineering directory, resolve ID patterns, add ADR-0006 playbook decision, and expand reviewer roles. |
+| 2026-07-07 | 1.0.0 | Lyra Architecture Team | Complete remediation audit updates, repository map alignment, named approvers, and amendment procedure. |

@@ -1,23 +1,97 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://lyra.example/schemas/conversation.schema.json",
-  "title": "Lyra Conversation Schema",
-  "description": "Documentation placeholder for the planned conversation schema. It records purpose and expected ownership boundaries without defining implementation details.",
+  "title": "Lyra Conversation Session Schema",
+  "description": "Defines the structure of a conversation session, capturing state transitions, metadata, and turn-taking records.",
   "type": "object",
   "properties": {
-    "purpose": {
+    "conversation_id": {
       "type": "string",
-      "description": "Human-readable purpose of this schema."
+      "format": "uuid",
+      "description": "Unique UUID representing the active conversation session."
     },
-    "plannedFields": {
+    "tenant_id": {
+      "type": "string",
+      "description": "The tenant organization ID isolating this session."
+    },
+    "project_id": {
+      "type": "string",
+      "description": "Target project identifier."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["active", "suspended", "completed", "failed"],
+      "description": "Lifecycle state of the conversation."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "playbook_ref": {
+      "type": "string",
+      "description": "Reference to the governing playbook file."
+    },
+    "turns": {
       "type": "array",
       "items": {
-        "type": "string"
-      },
-      "description": "Fields to be specified during schema design."
+        "type": "object",
+        "properties": {
+          "turn_id": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "input": {
+            "type": "object",
+            "properties": {
+              "type": { "type": "string", "enum": ["text", "audio"] },
+              "content": { "type": "string" }
+            },
+            "required": ["type", "content"]
+          },
+          "intent_detected": {
+            "type": "string"
+          },
+          "entities_extracted": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "capabilities_invoked": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "capability_id": { "type": "string" },
+                "request_payload": { "type": "object" },
+                "response_payload": { "type": "object" },
+                "status": { "type": "string", "enum": ["success", "failure"] }
+              },
+              "required": ["capability_id", "request_payload", "response_payload", "status"]
+            }
+          },
+          "output": {
+            "type": "object",
+            "properties": {
+              "type": { "type": "string", "enum": ["text", "audio"] },
+              "content": { "type": "string" }
+            },
+            "required": ["type", "content"]
+          }
+        },
+        "required": ["turn_id", "timestamp", "input", "output"],
+        "additionalProperties": false
+      }
     }
   },
-  "additionalProperties": true,
-  "x-documentationStatus": "Draft",
-  "x-intendedUse": "Schema design and validation planning; do not treat as implementation-ready until promoted to Implementation Ready or Approved."
+  "required": ["conversation_id", "tenant_id", "project_id", "status", "created_at", "turns"],
+  "additionalProperties": false,
+  "x-documentationStatus": "Approved",
+  "x-intendedUse": "Authoritative validation of conversation session records stored in the session log persistence layer."
 }

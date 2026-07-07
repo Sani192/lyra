@@ -1,15 +1,96 @@
 {
-  "example": "clinic",
-  "purpose": "illustrative expected response shape",
-  "lyra_owns": [
-    "conversation",
-    "transcript",
-    "events"
-  ],
-  "consumer_owns": [
-    "business_state",
-    "business_rules"
-  ],
-  "documentation_status": "Draft",
-  "intended_use": "Illustrative example output for planning and contract review; not authoritative implementation test data until promoted."
+  "conversation_id": "a90d8a6b-c743-4b68-b8cf-91b470129302",
+  "tenant_id": "org.health_care_network",
+  "project_id": "project.scheduling_assistant",
+  "status": "completed",
+  "created_at": "2026-07-07T14:30:00Z",
+  "updated_at": "2026-07-07T14:31:45Z",
+  "playbook_ref": "docs/playbooks/appointment-booking.md",
+  "turns": [
+    {
+      "turn_id": 1,
+      "timestamp": "2026-07-07T14:30:05Z",
+      "input": {
+        "type": "text",
+        "content": "I'd like to book a dental checkup next Tuesday, July 14th."
+      },
+      "intent_detected": "request_appointment",
+      "entities_extracted": {
+        "department": "dental",
+        "start_date": "2026-07-14",
+        "end_date": "2026-07-14"
+      },
+      "capabilities_invoked": [
+        {
+          "capability_id": "lyra.examples.clinic.lookup_slots",
+          "request_payload": {
+            "department": "dental",
+            "start_date": "2026-07-14",
+            "end_date": "2026-07-14"
+          },
+          "response_payload": {
+            "slots": [
+              {
+                "slot_id": "SLOT-998",
+                "time": "10:00 AM",
+                "doctor": "Dr. Miller"
+              }
+            ]
+          },
+          "status": "success"
+        }
+      ],
+      "output": {
+        "type": "text",
+        "content": "I found an open dental checkup slot next Tuesday at 10:00 AM with Dr. Miller. Would you like to schedule that?"
+      }
+    },
+    {
+      "turn_id": 2,
+      "timestamp": "2026-07-07T14:31:10Z",
+      "input": {
+        "type": "text",
+        "content": "Yes, please."
+      },
+      "intent_detected": "confirm_slot",
+      "entities_extracted": {},
+      "capabilities_invoked": [],
+      "output": {
+        "type": "text",
+        "content": "To complete this booking, could I get your full name and health insurance identifier?"
+      }
+    },
+    {
+      "turn_id": 3,
+      "timestamp": "2026-07-07T14:31:40Z",
+      "input": {
+        "type": "text",
+        "content": "Sure, my name is Robin Doe and my insurance ID is INS-12345."
+      },
+      "intent_detected": "provide_details",
+      "entities_extracted": {
+        "patient_name": "Robin Doe",
+        "insurance_id": "INS-12345"
+      },
+      "capabilities_invoked": [
+        {
+          "capability_id": "lyra.examples.clinic.book_appointment",
+          "request_payload": {
+            "slot_id": "SLOT-998",
+            "patient_name": "Robin Doe",
+            "insurance_id": "INS-12345"
+          },
+          "response_payload": {
+            "appointment_id": "APT-55201",
+            "status": "scheduled"
+          },
+          "status": "success"
+        }
+      ],
+      "output": {
+        "type": "text",
+        "content": "Great. Your dental appointment is confirmed for Tuesday, July 14th at 10:00 AM with Dr. Miller. Your booking code is APT-55201."
+      }
+    }
+  ]
 }

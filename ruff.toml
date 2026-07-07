@@ -1,0 +1,27 @@
+# Set the target Python version
+target-version = "py311"
+
+# Same as Black's default line length
+line-length = 100
+
+# Enable Pyflakes (`F`), pycodestyle (`E`, `W`), Isort (`I`), Naming (`N`)
+select = ["E", "F", "W", "I", "N", "UP", "B", "A", "C4", "SIM", "ARG"]
+ignore = []
+
+# Exclude standard directories
+exclude = [
+    ".git",
+    ".mypy_cache",
+    ".ruff_cache",
+    ".venv",
+    "__pycache__",
+    "build",
+    "dist",
+    "venv",
+]
+
+[mccabe]
+max-complexity = 10
+
+[isort]
+combine-as-imports = true

@@ -4,23 +4,42 @@
 
 **Status:** Approved.
 
-**Intended Use:** Authoritative AI-agent operating context; safe for repository navigation and contribution workflow decisions.
+**Intended Use:** Authoritative AI-agent operating context; safe for repository navigation, context building, and prompting constraints.
 
+## Purpose
 
-## Before Changing Code
+Provide structured guidance, prompt templates, and reasoning constraints for AI agents interacting with the Lyra repository, ensuring compatibility with our documentation-first engineering model.
 
-1. Read `PROJECT.md`.
-2. Read relevant specifications.
-3. Read related ADRs.
-4. Identify requirement IDs.
-5. Review contracts, schemas, examples, and standards.
-6. Update documentation first.
-7. State assumptions in commit or PR notes.
+## Agent System Prompt Recommendations
 
-## Contribution Rules
+When initializing an AI coding session for Lyra, prepend or configure the agent's context with these instructions:
 
-Avoid assumptions, never bypass architecture, do not invent hidden requirements, do not add consumer-specific shortcuts, and always reference requirement IDs for requirement-impacting work.
+1. **Constitutional Alignment:** "You are an AI software engineer working on Lyra. You must adhere to the rules in `PROJECT.md` at all times. Specifically, you must never implement business logic or own business state."
+2. **Context Scanning:** "Before proposing any code change, you must locate the relevant specification in `docs/specifications/` and read the associated ADRs in `docs/decisions/`."
+3. **No Placeholders:** "Do not output TODOs or placeholder functions. Every function you write must be fully typed and documented."
 
-## Safe Prompt Pattern
+## Structured Prompt Templates
 
-"I will update documentation and traceability for requirement `LYRA-...`, preserve Lyra's stateless contract-driven boundary, and avoid implementing consumer business logic."
+### Template A: Proposing a Requirement
+```
+I am planning to implement requirement ID: [ID].
+I have read the specification file: [Spec Path].
+Here is the proposed update to the specification's acceptance criteria:
+[Proposed Criteria]
+Please review this specification update before I begin implementation planning.
+```
+
+### Template B: Architecture Review
+```
+I am proposing an architectural change for [Component].
+Related Requirement IDs: [IDs].
+I have created/updated ADR: [ADR Number] with options and trade-offs.
+Here is the proposed component diagram change:
+[Mermaid Diagram]
+```
+
+## Review Checklist
+
+- [ ] Prompts reference active requirement IDs.
+- [ ] Prompts declare that the agent has read `PROJECT.md` and related ADRs.
+- [ ] Prompts do not request stateful database logic within the Lyra platform boundaries.

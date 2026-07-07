@@ -1,15 +1,89 @@
 {
-  "example": "erp",
-  "purpose": "illustrative expected response shape",
-  "lyra_owns": [
-    "conversation",
-    "transcript",
-    "events"
-  ],
-  "consumer_owns": [
-    "business_state",
-    "business_rules"
-  ],
-  "documentation_status": "Draft",
-  "intended_use": "Illustrative example output for planning and contract review; not authoritative implementation test data until promoted."
+  "conversation_id": "d90a8a6b-c743-4b68-b8cf-91b470129605",
+  "tenant_id": "org.supply_chain_corp",
+  "project_id": "project.tracking_assistant",
+  "status": "completed",
+  "created_at": "2026-07-07T12:00:00Z",
+  "updated_at": "2026-07-07T12:01:25Z",
+  "playbook_ref": "docs/playbooks/payment-followup.md",
+  "turns": [
+    {
+      "turn_id": 1,
+      "timestamp": "2026-07-07T12:00:05Z",
+      "input": {
+        "type": "text",
+        "content": "Hi, I'm calling to check the status of my order ORD-9821."
+      },
+      "intent_detected": "track_order",
+      "entities_extracted": {
+        "order_id": "ORD-9821"
+      },
+      "capabilities_invoked": [],
+      "output": {
+        "type": "text",
+        "content": "I can help with that. For security verification, could you tell me the billing zip code for this order?"
+      }
+    },
+    {
+      "turn_id": 2,
+      "timestamp": "2026-07-07T12:00:40Z",
+      "input": {
+        "type": "text",
+        "content": "Sure, it is 94105."
+      },
+      "intent_detected": "provide_details",
+      "entities_extracted": {
+        "zip_code": "94105"
+      },
+      "capabilities_invoked": [
+        {
+          "capability_id": "lyra.examples.erp.get_order_details",
+          "request_payload": {
+            "order_id": "ORD-9821",
+            "zip_code": "94105"
+          },
+          "response_payload": {
+            "order_id": "ORD-9821",
+            "status": "shipped",
+            "items": ["Widgets", "Gadgets"],
+            "total_price": 79.99
+          },
+          "status": "success"
+        }
+      ],
+      "output": {
+        "type": "text",
+        "content": "Order ORD-9821 containing Widgets and Gadgets has shipped. Would you like me to fetch the shipping tracking details?"
+      }
+    },
+    {
+      "turn_id": 3,
+      "timestamp": "2026-07-07T12:01:20Z",
+      "input": {
+        "type": "text",
+        "content": "Yes, please."
+      },
+      "intent_detected": "confirm_tracking",
+      "entities_extracted": {},
+      "capabilities_invoked": [
+        {
+          "capability_id": "lyra.examples.erp.get_shipment_tracking",
+          "request_payload": {
+            "order_id": "ORD-9821"
+          },
+          "response_payload": {
+            "tracking_number": "TRK-1234567890",
+            "carrier": "FedEx",
+            "status": "In Transit",
+            "estimated_delivery": "2026-07-10T15:00:00Z"
+          },
+          "status": "success"
+        }
+      ],
+      "output": {
+        "type": "text",
+        "content": "Your package is in transit via FedEx, tracking code TRK-1234567890. It is estimated to be delivered on July 10th by 3:00 PM."
+      }
+    }
+  ]
 }

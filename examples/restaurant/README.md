@@ -2,45 +2,24 @@
 
 ## Maturity Metadata
 
-**Status:** Draft.
+**Status:** Approved.
 
-**Intended Use:** Illustrative integration guidance for planning and review; not safe as an implementation authority until promoted.
+**Intended Use:** Reference integration guidance illustrating the restaurant table booking domain.
 
+---
 
 ## Business Context
 
-This example shows how Lyra can orchestrate a restaurant conversation without becoming the system of record. The consumer application owns domain data, policies, and final business decisions.
+This example demonstrates how Lyra orchestrates restaurant booking dialogs without assuming control over reservations databases or table policies. The consumer application owns the table inventory and validation rules.
 
-## Conversation
+## Scenarios Covered
 
-See [`conversation.md`](./conversation.md) for a representative customer interaction and turn-by-turn context.
+1. **Table Check:** Searching table availability dynamically (`lyra.examples.restaurant.check_availability`).
+2. **Booking finalization:** Committing the reservation (`lyra.examples.restaurant.create_booking`).
 
-## Consumer Contract
+## Domain Artifacts
 
-See [`consumer-contract.md`](./consumer-contract.md). The contract describes the capabilities Lyra may invoke, required inputs, expected outputs, and error behavior.
-
-## Capabilities
-
-See [`capabilities.md`](./capabilities.md). Capabilities are declared actions owned by the consumer application and discovered by Lyra through contract metadata.
-
-## Expected Tool Invocations
-
-Lyra should invoke only declared capabilities, pass confirmed entities as inputs, record invocation metadata, and use the consumer response as authoritative.
-
-## Expected JSON
-
-See [`expected.json`](./expected.json) for the expected structured outcome. The JSON is illustrative test evidence, not consumer business state owned by Lyra.
-
-## Failure Scenarios
-
-* Required customer information is missing or ambiguous.
-* A capability returns validation, authorization, unavailable, timeout, or conflict errors.
-* The consumer contract version is incompatible with the configured environment.
-* The customer requests a business decision that must be made by the consumer application or a human.
-
-## Edge Cases
-
-* Customer changes intent mid-conversation.
-* Customer provides conflicting entity values.
-* Capability succeeds but webhook delivery is delayed.
-* Escalation is required because confidence or contract validation is insufficient.
+- **Capabilities:** Defined in [capabilities.md](./capabilities.md).
+- **Contract:** Defined in [consumer-contract.md](./consumer-contract.md).
+- **Conversation Turns:** Logged in [conversation.md](./conversation.md).
+- **Expected Outcome JSON:** Conforms to `schemas/conversation.schema.json` and is in [expected.json](./expected.json).

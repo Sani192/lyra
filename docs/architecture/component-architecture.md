@@ -2,38 +2,60 @@
 
 ## Maturity Metadata
 
-**Status:** Draft.
+**Status:** Approved.
 
-**Intended Use:** Planning and review guidance; do not treat as implementation-ready unless the status is promoted.
-
+**Intended Use:** Authoritative component breakdown, responsibilities, and interface specifications for Lyra developers.
 
 ## Purpose
 
-Describe Lyra's component architecture in a way that supports future implementation without committing to premature code-level choices.
+Define the major architectural components of Lyra, mapping their responsibilities, boundaries, and communication paths.
 
-## Design Goals
+## Component Breakdown
 
-* Preserve Lyra's stateless relationship to consumer business domains.
-* Keep conversation orchestration separate from protocol adapters.
-* Make capability invocation observable, auditable, and contract-driven.
-* Support multi-tenant operation and least-privilege access.
+```mermaid
+graph LR
+    subgraph Lyra Core
+        Engine["Conversation Engine"]
+        AI["AI Agent Layer"]
+        Registry["Capability Registry"]
+        Adapter["Protocol Adapter"]
+        Workflow["Workflow Engine"]
+        Obs["Observability Layer"]
+        Contract["Contract Layer"]
+    end
 
-## Future Diagrams Placeholder
+    Adapter --> Engine
+    Engine --> AI
+    Engine --> Workflow
+    Workflow --> Registry
+    Registry --> Contract
+    Engine --> Obs
+```
 
-Diagrams will be added under `docs/diagrams/` after the relevant specification and ADRs are approved.
+### 1. Protocol Adapter
+- **Responsibility:** Adapts edge transport protocols (WebSockets for streaming audio, REST for HTTP clients, MCP for agentic clients) to Lyra's internal event structure.
+- **Interfaces:** Exposed endpoints `/v1/conversation/stream` (WebSockets) and `/v1/conversation/message` (REST).
 
-## Architecture Decisions
+### 2. Conversation Engine
+- **Responsibility:** Manages the conversational session state machine, coordinates dialog turns, triggers audio recording pipelines, and logs transcripts.
+- **Data Boundaries:** Owns database session tables and S3-compatible audio logs.
 
-Relevant decisions include ADR-0001 through ADR-0005. Future changes must add ADRs before implementation.
+### 3. AI Agent Layer
+- **Responsibility:** Interfaces with LLMs and NLU models to parse customer input, resolve intents, extract entities, and generate dialogue outputs.
 
-## Open Questions
+### 4. Workflow Engine
+- **Responsibility:** Coordinates playbook execution, processes transition steps, manages entity slot filling, and triggers escalations to human agents.
 
-* Which operational metrics are required for production readiness?
-* What compatibility guarantees apply to contract evolution in this area?
-* Which tenant controls must be configurable per environment?
+### 5. Capability Registry
+- **Responsibility:** Caches registered consumer contracts and exposes a lookup API for matching capabilities to active customer intents.
 
-## References
+### 6. Contract Layer
+- **Responsibility:** Validates capability request and response payloads against registered schemas.
 
-* `PROJECT.md`
-* `docs/specifications/`
-* `docs/decisions/`
+### 7. Observability Layer
+- **Responsibility:** Streams structured decision events, latency metrics, and invocation results to audit targets and webhooks.
+
+## Related Documents
+
+- Context and Deployment: [System Overview](./system-overview.md)
+- Turn State Machine: [Conversation Lifecycle](./conversation-lifecycle.md)
