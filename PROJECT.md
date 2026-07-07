@@ -1,71 +1,111 @@
 # Lyra Project Constitution
 
-## Mandatory First Read
+## Status
 
-Every human contributor and AI coding agent must read this document before changing Lyra. This file defines the product vision, architectural boundaries, repository rules, and non-negotiable principles that protect Lyra from becoming a consumer-specific application.
-
-## Product Vision
-
-Lyra is an AI Voice Orchestration Platform that enables reliable, observable, contract-driven conversations between customers and consumer applications. Lyra understands customer intent, selects appropriate capabilities, invokes those capabilities through standardized contracts, and orchestrates a natural conversation while consumer applications remain the systems of record.
+Authoritative. This document is mandatory reading for every human contributor and AI coding agent before changing the repository.
 
 ## Mission
 
-Lyra's mission is to make voice automation safe for production business workflows by combining conversational intelligence with strict ownership boundaries. Lyra should help organizations automate customer interactions without duplicating or replacing their existing business applications.
+Lyra makes production voice automation safe, observable, and integration-friendly. It orchestrates customer conversations, understands intent, invokes consumer-owned capabilities through explicit contracts, and records the evidence needed to operate those conversations responsibly.
 
-## Architecture Principles
+## Vision
 
-1. **Lyra never owns business data.** Orders, customers, inventory, appointments, payments, loyalty state, pricing rules, and business policies live in consumer applications.
-2. **Consumer applications own business logic.** Lyra may ask what actions are available, invoke declared capabilities, and report outcomes, but it must not decide consumer-specific business policy.
-3. **Lyra is contract driven.** Integrations are described through explicit contracts that define capability names, inputs, outputs, errors, safety rules, and observability expectations.
-4. **Capabilities are protocol agnostic.** A capability represents an application action independent of whether it is exposed through REST, OpenAPI, MCP, webhooks, or future protocols.
-5. **REST, OpenAPI, and MCP are first-class integration paths.** Lyra must support these protocols without binding the domain model to one transport.
-6. **Conversation state is not business state.** Lyra may store transcripts, recordings, context, events, and orchestration metadata, but it must not become the source of truth for external domains.
-7. **Observability is a product feature.** Every important decision, capability invocation, error, and handoff must be traceable.
-8. **Security and privacy are design constraints.** Least privilege, tenant isolation, data minimization, and auditability apply to all platform areas.
-9. **Backward compatibility matters.** Contracts should evolve predictably through versioning, deprecation windows, and compatibility guidance.
-10. **Architecture is documented before implementation.** Major changes require specification updates and ADRs before code is written.
+Lyra should become the neutral orchestration layer between conversational AI and business systems. Any organization should be able to expose capabilities through REST, OpenAPI, MCP, or future protocols while Lyra coordinates the conversation without absorbing consumer business logic or becoming a domain-specific application.
 
-## Domain Language
+## Engineering Philosophy
 
-* **Consumer:** An external application or organization that integrates with Lyra.
-* **Capability:** A declared business action Lyra can invoke on a consumer application.
-* **Contract:** The machine-readable and human-readable agreement describing available capabilities.
-* **Conversation:** A customer interaction orchestrated by Lyra.
-* **Session:** A bounded runtime instance of a conversation.
-* **Workflow:** A structured orchestration path that may coordinate intents, prompts, capabilities, events, and escalation.
-* **Playbook:** A scenario-specific strategy for conversations such as ordering, booking, support, or lead qualification.
-* **Capability Registry:** The catalog where Lyra discovers and evaluates available capabilities.
-* **Capability Intelligence Framework:** The future framework for ranking, validating, selecting, and explaining capability usage.
+* Prefer explicit contracts over implicit behavior.
+* Prefer documented decisions over tribal knowledge.
+* Prefer boring, observable, testable components over clever abstractions.
+* Prefer protocol-agnostic domain models with protocol-specific adapters at the edge.
+* Prefer compatibility, migration paths, and clear deprecation over silent breaking changes.
 
-## Repository Rules
+## Architecture Philosophy
 
-* `PROJECT.md` is authoritative when repository documents conflict.
-* Requirement IDs must be referenced by implementation plans, commits, reviews, and tests when applicable.
-* New architecture decisions require ADRs under `docs/decisions/`.
-* Specifications belong under `docs/specifications/` and should remain numbered for stable navigation.
-* Consumer examples must demonstrate boundaries and must not imply Lyra owns business state.
-* Backend, frontend, and SDK directories are reserved for future implementation and should remain code-free until implementation is explicitly approved.
+Lyra owns conversation orchestration, runtime coordination, transcripts, recordings, analytics, contracts, capability invocation metadata, and observability. Consumer applications own customers, orders, inventory, appointments, payments, loyalty state, pricing, policies, and business rules. Conversation state is not business state.
 
-## Coding Philosophy
+## Repository Philosophy
 
-Lyra code, when introduced, must be boring, observable, testable, and contract-aligned. Prefer explicit domain names over clever abstractions. Separate orchestration from protocol adapters. Keep consumer-specific customization in configuration, contracts, playbooks, or external systems rather than platform code.
+The repository is the single source of truth. Every important requirement, domain term, architecture decision, contract convention, and engineering standard belongs in version control. Documents must be understandable without previous chat history.
 
 ## Documentation Philosophy
 
-Documentation is a design artifact, not an afterthought. Each specification should communicate purpose, scope, status, owner, revision history, planned sections, future work, and references. Documentation should be readable by humans and structured enough for AI agents to navigate safely.
+Documentation precedes implementation. Specifications explain what must be true, ADRs explain why architectural choices were made, standards explain how contributors work, examples show safe integration patterns, and traceability links requirements to architecture, APIs, implementation, tests, and documentation.
+
+## Design Principles
+
+1. Lyra never owns consumer business state.
+2. Consumer applications own business logic.
+3. Integrations are contract-driven.
+4. Capabilities are protocol-agnostic.
+5. REST, OpenAPI, and MCP are first-class protocols.
+6. Observability is a product feature.
+7. Security, privacy, and tenant isolation are design constraints.
+8. Requirement IDs are stable references for planning, reviews, commits, tests, and documentation.
+9. Architecture decisions require ADRs.
+10. Examples must reinforce boundaries rather than imply hidden platform behavior.
+
+## Decision-Making Framework
+
+When evaluating a change, answer these questions in order:
+
+1. Which requirement IDs justify the change?
+2. Does the change keep business state and business logic in the consumer application?
+3. Does the change preserve protocol agnosticism?
+4. Does the change require a new or updated ADR?
+5. What documentation, contracts, examples, and tests must change with it?
+6. What compatibility or migration impact does it create?
+7. How will operators observe and debug the behavior?
 
 ## Non-Negotiable Rules
 
 * Never introduce consumer-specific business logic into Lyra.
-* Never make Lyra the source of truth for orders, customers, inventory, appointments, payments, loyalty, or business rules.
-* Always treat capabilities as contract-defined and protocol-agnostic.
-* Always support the architectural direction of REST, OpenAPI, and MCP.
-* Always reference requirement IDs for requirement-impacting changes.
-* Always update documentation before implementation.
-* Always create or update ADRs for material architecture decisions.
-* Always preserve backward compatibility where possible and document breaking changes clearly.
-* Always protect tenant isolation and customer data.
+* Never make Lyra the system of record for external business domains.
+* Never hardcode behavior for one consumer when a contract, playbook, or configuration should describe it.
+* Never implement a material feature without requirement IDs and documentation.
+* Never bypass contract validation, traceability, security review, or ADR requirements.
 
-## AI Agent Instructions
+## Definition of Ready
 
-AI agents must begin with this file, then read `.ai/README.md` and `.ai/context.md`. Agents should avoid implementation unless explicitly requested. When implementation is requested later, agents must identify relevant requirement IDs, update documentation first, and keep changes within the documented architecture boundaries.
+A change is ready for implementation only when the relevant requirement IDs, affected documents, compatibility impact, test strategy, and architecture decision status are known.
+
+## Definition of Done
+
+A change is done only when documentation is updated, requirement IDs are traceable, tests/checks are recorded, compatibility impact is documented, examples are updated when behavior is visible, and reviewers can understand the change without external context.
+
+## Contribution Workflow
+
+1. Read `PROJECT.md`, `README.md`, and `.ai/00-start-here.md`.
+2. Identify affected requirements in `docs/specifications/` and `.ai/05-requirements-index.md`.
+3. Review related ADRs in `docs/decisions/`.
+4. Update specifications, contracts, schemas, examples, or standards before implementation.
+5. Make the smallest coherent change.
+6. Run relevant checks.
+7. Document traceability and review evidence.
+
+## AI Workflow
+
+AI agents must assume no prior chat history. Before changing code or docs, read the AI Knowledge Center, identify requirement IDs, inspect affected contracts and ADRs, state assumptions in the change, and avoid adding application features unless explicitly requested.
+
+## Human Workflow
+
+Human contributors should use the same standards as AI agents: write down decisions, keep changes reviewable, challenge hidden assumptions, and require traceability between requirements, architecture, implementation, tests, and documentation.
+
+## Repository Map
+
+| Path | Purpose |
+| --- | --- |
+| `.ai/` | Mandatory AI Knowledge Center and operating guide. |
+| `docs/specifications/` | Numbered product, platform, API, security, observability, deployment, and UI requirements. |
+| `docs/architecture/` | Component, lifecycle, protocol, storage, security, scalability, and deployment architecture. |
+| `docs/contracts/` | Consumer contract guidance and integration expectations. |
+| `docs/decisions/` | Architecture Decision Records. |
+| `docs/engineering/` | Engineering standards for coding, documentation, versioning, branching, review, testing, conventions, and traceability. |
+| `docs/traceability/` | Requirement-to-delivery traceability model. |
+| `examples/` | Domain examples demonstrating contracts, conversations, capabilities, expected JSON, and failure cases. |
+| `schemas/` | JSON schemas for contracts, capabilities, conversations, events, organizations, and workflows. |
+| `backend/`, `frontend/`, `sdk/` | Reserved implementation areas; do not add business logic without explicit implementation approval. |
+
+## Quality Standards
+
+All repository content must be accurate, cross-referenced, professionally written, and useful to a future contributor. Placeholder text, unexplained TODOs, broken links, and ambiguous ownership are not acceptable.
