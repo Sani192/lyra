@@ -1,0 +1,13 @@
+{
+  "example": "restaurant",
+  "purpose": "illustrative expected response shape",
+  "lyra_owns": [
+    "conversation",
+    "transcript",
+    "events"
+  ],
+  "consumer_owns": [
+    "business_state",
+    "business_rules"
+  ]
+}

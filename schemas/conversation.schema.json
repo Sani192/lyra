@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lyra.example/schemas/conversation.schema.json",
+  "title": "Lyra Conversation Schema",
+  "description": "Documentation placeholder for the planned conversation schema. It records purpose and expected ownership boundaries without defining implementation details.",
+  "type": "object",
+  "properties": {
+    "purpose": {
+      "type": "string",
+      "description": "Human-readable purpose of this schema."
+    },
+    "plannedFields": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Fields to be specified during schema design."
+    }
+  },
+  "additionalProperties": true
+}
